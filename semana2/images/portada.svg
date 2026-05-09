@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="server" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0b66c3"/>
+      <stop offset="100%" style="stop-color:#0a4f96"/>
+    </linearGradient>
+    <linearGradient id="vm1g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#16a34a;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#15803d;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="vm2g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d97706;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#b45309;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#0284c7"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="320" fill="url(#bg)" rx="16"/>
+  <!-- Physical server -->
+  <rect x="30" y="80" width="140" height="160" rx="10" fill="url(#server)" opacity="0.95"/>
+  <rect x="40" y="92" width="120" height="8" rx="4" fill="rgba(255,255,255,0.3)"/>
+  <rect x="40" y="108" width="120" height="8" rx="4" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="55" cy="130" r="5" fill="#22c55e"/>
+  <circle cx="70" cy="130" r="5" fill="#22c55e"/>
+  <circle cx="85" cy="130" r="5" fill="#f59e0b"/>
+  <rect x="40" y="145" width="120" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+  <rect x="40" y="155" width="90" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+  <rect x="40" y="165" width="110" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+  <text x="100" y="215" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">HOST / HIPERVISOR</text>
+  <text x="100" y="228" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">VirtualBox</text>
+  <!-- Arrow -->
+  <line x1="175" y1="160" x2="195" y2="160" stroke="#0b66c3" stroke-width="2.5"/>
+  <polygon points="195,155 205,160 195,165" fill="#0b66c3"/>
+  <!-- VM boxes -->
+  <rect x="210" y="80" width="130" height="70" rx="8" fill="url(#vm1g)"/>
+  <text x="225" y="101" font-family="sans-serif" font-size="10" font-weight="800" fill="white">VM 1 — Windows 11</text>
+  <rect x="220" y="108" width="100" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+  <rect x="220" y="118" width="75" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
+  <text x="225" y="142" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.85)">CPU: 2 cores · RAM: 4 GB</text>
+  <rect x="210" y="165" width="130" height="70" rx="8" fill="url(#vm2g)"/>
+  <text x="225" y="186" font-family="sans-serif" font-size="10" font-weight="800" fill="white">VM 2 — Windows 10</text>
+  <rect x="220" y="193" width="100" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+  <rect x="220" y="203" width="75" height="6" rx="3" fill="rgba(255,255,255,0.3)"/>
+  <text x="225" y="227" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.85)">CPU: 2 cores · RAM: 2 GB</text>
+  <!-- Cloud -->
+  <ellipse cx="400" cy="105" rx="55" ry="32" fill="url(#cloud)" opacity="0.92"/>
+  <ellipse cx="375" cy="115" rx="40" ry="22" fill="url(#cloud)" opacity="0.92"/>
+  <ellipse cx="420" cy="118" rx="40" ry="22" fill="url(#cloud)" opacity="0.92"/>
+  <ellipse cx="400" cy="128" rx="60" ry="20" fill="url(#cloud)" opacity="0.92"/>
+  <text x="400" y="117" font-family="sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle">NUBE</text>
+  <text x="400" y="130" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.85)" text-anchor="middle">IaaS · SaaS · PaaS</text>
+  <!-- Dashed line to cloud -->
+  <line x1="345" y1="120" x2="355" y2="120" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Labels bottom -->
+  <rect x="30" y="260" width="440" height="40" rx="8" fill="rgba(255,255,255,0.55)" stroke="rgba(11,102,195,0.15)" stroke-width="1"/>
+  <text x="250" y="278" font-family="sans-serif" font-size="11" font-weight="700" fill="#0a4f96" text-anchor="middle">Virtualización · Computación en la Nube · Sistemas Operativos</text>
+  <text x="250" y="292" font-family="sans-serif" font-size="9.5" fill="#50607a" text-anchor="middle">TI-313 · Semana 2 — Universidad CENFOTEC</text>
+</svg>

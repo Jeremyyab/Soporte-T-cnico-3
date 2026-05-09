@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="320" fill="url(#bg)" rx="16"/>
+  <!-- Snapshots section -->
+  <text x="160" y="22" font-family="sans-serif" font-size="12" font-weight="800" fill="#0a4f96" text-anchor="middle">Snapshots (Instantáneas)</text>
+  <!-- VM states timeline -->
+  <circle cx="50" cy="60" r="20" fill="rgba(11,102,195,0.85)"/>
+  <text x="50" y="55" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="700">Estado</text>
+  <text x="50" y="67" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle">Inicial</text>
+  <line x1="70" y1="60" x2="100" y2="60" stroke="#0b66c3" stroke-width="2"/>
+  <polygon points="98,55 108,60 98,65" fill="#0b66c3"/>
+
+  <circle cx="125" cy="60" r="20" fill="rgba(22,163,74,0.85)"/>
+  <text x="125" y="55" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="700">Snap</text>
+  <text x="125" y="67" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle">1</text>
+  <text x="125" y="90" font-family="sans-serif" font-size="8" fill="#16a34a" text-anchor="middle">SO limpio</text>
+  <line x1="145" y1="60" x2="175" y2="60" stroke="#16a34a" stroke-width="2"/>
+  <polygon points="173,55 183,60 173,65" fill="#16a34a"/>
+
+  <circle cx="200" cy="60" r="20" fill="rgba(22,163,74,0.85)"/>
+  <text x="200" y="55" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="700">Snap</text>
+  <text x="200" y="67" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle">2</text>
+  <text x="200" y="90" font-family="sans-serif" font-size="8" fill="#16a34a" text-anchor="middle">Apps instaladas</text>
+  <line x1="220" y1="60" x2="250" y2="60" stroke="#16a34a" stroke-width="2"/>
+  <polygon points="248,55 258,60 248,65" fill="#16a34a"/>
+
+  <circle cx="275" cy="60" r="20" fill="rgba(217,119,6,0.85)"/>
+  <text x="275" y="55" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="700">Estado</text>
+  <text x="275" y="67" font-family="sans-serif" font-size="8" fill="white" text-anchor="middle">Actual</text>
+  <!-- Restore arrow -->
+  <path d="M 275 85 Q 200 120 125 85" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+  <polygon points="128,80 120,88 132,90" fill="#dc2626"/>
+  <text x="200" y="118" font-family="sans-serif" font-size="9" fill="#dc2626" text-anchor="middle" font-weight="700">Restaurar → volver a punto anterior</text>
+
+  <!-- Benefits -->
+  <rect x="20" y="130" width="300" height="65" rx="8" fill="rgba(22,163,74,0.08)" stroke="rgba(22,163,74,0.25)" stroke-width="1"/>
+  <text x="30" y="148" font-family="sans-serif" font-size="9.5" fill="#16a34a" font-weight="700">✅ Ventajas de los snapshots</text>
+  <text x="30" y="162" font-family="sans-serif" font-size="9" fill="#50607a">• Punto de recuperación antes de cambios riesgosos</text>
+  <text x="30" y="175" font-family="sans-serif" font-size="9" fill="#50607a">• Probar software sin miedo a dañar el SO</text>
+  <text x="30" y="188" font-family="sans-serif" font-size="9" fill="#50607a">• Ahorra tiempo vs reinstalar desde cero</text>
+
+  <!-- Clones section -->
+  <text x="400" y="22" font-family="sans-serif" font-size="12" font-weight="800" fill="#0a4f96" text-anchor="middle">Clonación de VMs</text>
+  <rect x="330" y="35" width="150" height="90" rx="8" fill="rgba(11,102,195,0.08)" stroke="rgba(11,102,195,0.25)" stroke-width="1"/>
+  <text x="405" y="53" font-family="sans-serif" font-size="10" fill="#0a4f96" text-anchor="middle" font-weight="700">VM Original</text>
+  <rect x="345" y="60" width="120" height="14" rx="4" fill="rgba(11,102,195,0.3)"/>
+  <text x="405" y="71" font-family="sans-serif" font-size="8.5" fill="white" text-anchor="middle">Windows + Apps</text>
+  <rect x="345" y="78" width="120" height="14" rx="4" fill="rgba(11,102,195,0.2)"/>
+  <text x="405" y="89" font-family="sans-serif" font-size="8.5" fill="#0a4f96" text-anchor="middle">50 GB configurado</text>
+  <text x="405" y="115" font-family="sans-serif" font-size="9" fill="#50607a" text-anchor="middle">Clonar →</text>
+  <!-- Clone 1 -->
+  <rect x="330" y="145" width="68" height="65" rx="8" fill="rgba(22,163,74,0.1)" stroke="rgba(22,163,74,0.3)" stroke-width="1"/>
+  <text x="364" y="163" font-family="sans-serif" font-size="9" fill="#16a34a" text-anchor="middle" font-weight="700">Clone 1</text>
+  <text x="364" y="176" font-family="sans-serif" font-size="8" fill="#50607a" text-anchor="middle">Full clone</text>
+  <text x="364" y="189" font-family="sans-serif" font-size="8" fill="#50607a" text-anchor="middle">Independiente</text>
+  <text x="364" y="203" font-family="sans-serif" font-size="8" fill="#50607a" text-anchor="middle">50 GB propio</text>
+  <!-- Clone 2 -->
+  <rect x="412" y="145" width="68" height="65" rx="8" fill="rgba(217,119,6,0.1)" stroke="rgba(217,119,6,0.3)" stroke-width="1"/>
+  <text x="446" y="163" font-family="sans-serif" font-size="9" fill="#d97706" text-anchor="middle" font-weight="700">Clone 2</text>
+  <text x="446" y="176" font-family="sans-serif" font-size="8" fill="#50607a" text-anchor="middle">Linked clone</text>
+  <text x="446" y="189" font-family="sans-serif" font-size="8" fill="#50607a" text-anchor="middle">Comparte base</text>
+  <text x="446" y="203" font-family="sans-serif" font-size="8" fill="#50607a" text-anchor="middle">~5 GB diff</text>
+
+  <!-- Bottom tip -->
+  <rect x="20" y="210" width="460" height="95" rx="8" fill="rgba(255,255,255,0.55)" stroke="rgba(11,102,195,0.15)" stroke-width="1"/>
+  <text x="30" y="228" font-family="sans-serif" font-size="10" font-weight="800" fill="#0a4f96">📋 Pasos para crear snapshot en VirtualBox</text>
+  <text x="30" y="243" font-family="sans-serif" font-size="9" fill="#50607a">1. Con la VM apagada o en pausa: Menú Máquina → Tomar instantánea</text>
+  <text x="30" y="257" font-family="sans-serif" font-size="9" fill="#50607a">2. Dar un nombre descriptivo (ej: "SO limpio antes de instalar Office")</text>
+  <text x="30" y="271" font-family="sans-serif" font-size="9" fill="#50607a">3. Para restaurar: Panel izquierdo → Instantáneas → clic derecho → Restaurar</text>
+  <text x="30" y="285" font-family="sans-serif" font-size="9" fill="#50607a">4. Confirmar la operación. La VM vuelve al estado guardado.</text>
+  <text x="30" y="298" font-family="sans-serif" font-size="9" fill="#dc2626" font-weight="700">⚠️ Los datos creados después del snapshot se pierden al restaurar</text>
+</svg>

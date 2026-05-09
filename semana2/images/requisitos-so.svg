@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/>
+      <stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="320" fill="url(#bg)" rx="16"/>
+  <text x="250" y="28" font-family="sans-serif" font-size="13" font-weight="800" fill="#0a4f96" text-anchor="middle">Requisitos Windows 10 vs Windows 11</text>
+  <!-- Headers -->
+  <rect x="25" y="40" width="200" height="24" rx="6" fill="rgba(11,102,195,0.75)"/>
+  <text x="125" y="56" font-family="sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle">Componente</text>
+  <rect x="232" y="40" width="115" height="24" rx="6" fill="rgba(14,165,233,0.75)"/>
+  <text x="289" y="56" font-family="sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle">Windows 10</text>
+  <rect x="354" y="40" width="121" height="24" rx="6" fill="rgba(11,102,195,0.9)"/>
+  <text x="414" y="56" font-family="sans-serif" font-size="11" font-weight="800" fill="white" text-anchor="middle">Windows 11</text>
+  <!-- Rows -->
+  <rect x="25" y="70" width="450" height="24" rx="0" fill="rgba(11,102,195,0.05)"/>
+  <text x="35" y="86" font-family="sans-serif" font-size="10" fill="#0a4f96" font-weight="700">CPU</text>
+  <text x="232" y="86" font-family="sans-serif" font-size="9.5" fill="#50607a">1 GHz, 2 núcleos</text>
+  <text x="354" y="86" font-family="sans-serif" font-size="9.5" fill="#50607a">1 GHz, 2 núcleos (64-bit)</text>
+
+  <rect x="25" y="94" width="450" height="24" rx="0" fill="rgba(255,255,255,0.4)"/>
+  <text x="35" y="110" font-family="sans-serif" font-size="10" fill="#0a4f96" font-weight="700">RAM</text>
+  <text x="232" y="110" font-family="sans-serif" font-size="9.5" fill="#50607a">1 GB (32-bit) / 2 GB (64-bit)</text>
+  <text x="354" y="110" font-family="sans-serif" font-size="9.5" fill="#50607a">4 GB mínimo</text>
+
+  <rect x="25" y="118" width="450" height="24" rx="0" fill="rgba(11,102,195,0.05)"/>
+  <text x="35" y="134" font-family="sans-serif" font-size="10" fill="#0a4f96" font-weight="700">Almacenamiento</text>
+  <text x="232" y="134" font-family="sans-serif" font-size="9.5" fill="#50607a">16–20 GB</text>
+  <text x="354" y="134" font-family="sans-serif" font-size="9.5" fill="#50607a">64 GB mínimo</text>
+
+  <rect x="25" y="142" width="450" height="24" rx="0" fill="rgba(255,255,255,0.4)"/>
+  <text x="35" y="158" font-family="sans-serif" font-size="10" fill="#0a4f96" font-weight="700">Tarjeta gráfica</text>
+  <text x="232" y="158" font-family="sans-serif" font-size="9.5" fill="#50607a">DirectX 9</text>
+  <text x="354" y="158" font-family="sans-serif" font-size="9.5" fill="#50607a">DirectX 12 / WDDM 2.0</text>
+
+  <rect x="25" y="166" width="450" height="24" rx="0" fill="rgba(11,102,195,0.05)"/>
+  <text x="35" y="182" font-family="sans-serif" font-size="10" fill="#0a4f96" font-weight="700">TPM</text>
+  <text x="232" y="182" font-family="sans-serif" font-size="9.5" fill="#50607a">No requerido</text>
+  <text x="354" y="182" font-family="sans-serif" font-size="9.5" fill="#dc2626" font-weight="700">TPM 2.0 requerido</text>
+
+  <rect x="25" y="190" width="450" height="24" rx="0" fill="rgba(255,255,255,0.4)"/>
+  <text x="35" y="206" font-family="sans-serif" font-size="10" fill="#0a4f96" font-weight="700">Secure Boot</text>
+  <text x="232" y="206" font-family="sans-serif" font-size="9.5" fill="#50607a">Recomendado</text>
+  <text x="354" y="206" font-family="sans-serif" font-size="9.5" fill="#dc2626" font-weight="700">Requerido (UEFI)</text>
+
+  <rect x="25" y="214" width="450" height="24" rx="0" fill="rgba(11,102,195,0.05)"/>
+  <text x="35" y="230" font-family="sans-serif" font-size="10" fill="#0a4f96" font-weight="700">Internet</text>
+  <text x="232" y="230" font-family="sans-serif" font-size="9.5" fill="#50607a">Opcional</text>
+  <text x="354" y="230" font-family="sans-serif" font-size="9.5" fill="#d97706" font-weight="700">Requerido para setup inicial</text>
+
+  <!-- Note VirtualBox -->
+  <rect x="25" y="250" width="450" height="55" rx="8" fill="rgba(22,163,74,0.08)" stroke="rgba(22,163,74,0.3)" stroke-width="1.5"/>
+  <text x="35" y="268" font-family="sans-serif" font-size="10" font-weight="800" fill="#16a34a">💡 En VirtualBox — requisitos del HOST</text>
+  <text x="35" y="282" font-family="sans-serif" font-size="9" fill="#50607a">Para correr 2 VMs simultáneas: CPU 4+ núcleos · RAM 8 GB mínimo (mejor 16 GB)</text>
+  <text x="35" y="295" font-family="sans-serif" font-size="9" fill="#50607a">Disco libre: 80–120 GB · Virtualización habilitada en BIOS/UEFI (Intel VT-x / AMD-V)</text>
+</svg>
