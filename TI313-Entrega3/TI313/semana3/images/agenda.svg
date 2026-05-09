@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/><stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="320" fill="url(#bg)" rx="16"/>
+  <line x1="60" y1="50" x2="60" y2="295" stroke="#0b66c3" stroke-width="3" stroke-dasharray="6,4"/>
+  <!-- A -->
+  <circle cx="60" cy="65" r="14" fill="#16a34a"/>
+  <text x="60" y="70" font-family="sans-serif" font-size="10" font-weight="800" fill="white" text-anchor="middle">A</text>
+  <rect x="85" y="46" width="390" height="55" rx="8" fill="rgba(22,163,74,.1)" stroke="rgba(22,163,74,.3)" stroke-width="1"/>
+  <text x="100" y="64" font-family="sans-serif" font-size="11" font-weight="800" fill="#16a34a">📖 Bloque A — Teoría (48 min)</text>
+  <text x="100" y="78" font-family="sans-serif" font-size="9.5" fill="#50607a">Windows: escritorio, explorador, panel de control, usuarios</text>
+  <text x="100" y="91" font-family="sans-serif" font-size="9.5" fill="#50607a">Herramientas admin · CLI esenciales · Redes Windows</text>
+  <!-- Receso -->
+  <circle cx="60" cy="127" r="14" fill="#94a3b8"/>
+  <text x="60" y="132" font-family="sans-serif" font-size="9" font-weight="800" fill="white" text-anchor="middle">☕</text>
+  <rect x="85" y="111" width="390" height="28" rx="8" fill="rgba(148,163,184,.15)" stroke="rgba(148,163,184,.4)" stroke-width="1"/>
+  <text x="100" y="129" font-family="sans-serif" font-size="10.5" font-weight="700" fill="#64748b">Receso — 10 minutos</text>
+  <!-- B -->
+  <circle cx="60" cy="177" r="14" fill="#d97706"/>
+  <text x="60" y="182" font-family="sans-serif" font-size="10" font-weight="800" fill="white" text-anchor="middle">B</text>
+  <rect x="85" y="158" width="390" height="55" rx="8" fill="rgba(217,119,6,.1)" stroke="rgba(217,119,6,.3)" stroke-width="1"/>
+  <text x="100" y="176" font-family="sans-serif" font-size="11" font-weight="800" fill="#d97706">🧪 Bloque B — Caso Práctico 3 (96 min)</text>
+  <text x="100" y="190" font-family="sans-serif" font-size="9.5" fill="#50607a">Administración del SO Windows en la VM del proyecto</text>
+  <text x="100" y="204" font-family="sans-serif" font-size="9.5" fill="#50607a">Usuarios, red cableada e inalámbrica, herramientas y CLI</text>
+  <!-- C -->
+  <circle cx="60" cy="252" r="14" fill="#0b66c3"/>
+  <text x="60" y="257" font-family="sans-serif" font-size="10" font-weight="800" fill="white" text-anchor="middle">C</text>
+  <rect x="85" y="234" width="390" height="38" rx="8" fill="rgba(11,102,195,.08)" stroke="rgba(11,102,195,.25)" stroke-width="1"/>
+  <text x="100" y="252" font-family="sans-serif" font-size="11" font-weight="800" fill="#0a4f96">💬 Bloque C — Retro y proyecto (40 min)</text>
+  <text x="100" y="265" font-family="sans-serif" font-size="9.5" fill="#50607a">Revisión CP3 · Avance del proyecto · Recordatorio entrega Sem 4</text>
+  <!-- Pill -->
+  <rect x="30" y="297" width="90" height="18" rx="9" fill="rgba(11,102,195,.12)" stroke="rgba(11,102,195,.3)" stroke-width="1"/>
+  <text x="75" y="309" font-family="sans-serif" font-size="9" font-weight="700" fill="#0a4f96" text-anchor="middle">⏱ 194 min</text>
+</svg>

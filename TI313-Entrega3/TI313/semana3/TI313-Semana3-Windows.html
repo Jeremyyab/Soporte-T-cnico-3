@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-313 · Semana 3 — Sistema Operativo Windows y Redes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+    :root{
+      --bg1:#eaf1f8;--bg2:#cfdceb;--stroke:#cfd9e6;--stroke2:#b9c8da;
+      --text:#0f172a;--muted:#50607a;--brand:#0b66c3;--brand2:#0a4f96;--accent:#0ea5e9;
+      --green:#16a34a;--amber:#d97706;--red:#dc2626;
+      --shadow:0 18px 45px rgba(15,23,42,.12);--round:22px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--text);
+      background:radial-gradient(900px 500px at 30% 10%,#fff 0%,rgba(255,255,255,0) 60%),
+        radial-gradient(800px 450px at 75% 65%,#fff 0%,rgba(255,255,255,0) 55%),
+        linear-gradient(160deg,var(--bg1),var(--bg2));
+      min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:16px;}
+    .shell{width:min(1400px,100%);position:relative;}
+    .topbar{background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.58));border:1px solid var(--stroke);border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:0;}
+    .brand img{height:38px;width:auto;display:block;}
+    .brand .txt{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
+    .brand .txt b{font-size:13px;color:var(--brand2);letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .brand .txt span{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .topcenter{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;min-width:0;}
+    .counterPill{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);font-weight:800;color:var(--brand2);font-size:13px;white-space:nowrap;}
+    .dot{width:9px;height:9px;border-radius:999px;background:var(--brand);box-shadow:0 0 0 4px rgba(11,102,195,.12);flex-shrink:0;}
+    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;}
+    .pill{padding:7px 11px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);color:var(--muted);display:flex;align-items:center;gap:7px;font-size:11px;user-select:none;white-space:nowrap;}
+    .pill .miniDot{width:8px;height:8px;border-radius:999px;background:rgba(11,102,195,.9);box-shadow:0 0 0 3px rgba(11,102,195,.10);flex-shrink:0;}
+    .btn{appearance:none;border:1px solid var(--stroke2);background:rgba(255,255,255,.78);color:var(--brand2);padding:7px 12px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;transition:.15s;user-select:none;white-space:nowrap;font-family:inherit;}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.95);box-shadow:0 4px 12px rgba(15,23,42,.08);}
+    .btn.primary{background:rgba(11,102,195,.10);border-color:rgba(11,102,195,.28);}
+    .btn.danger{color:#7a2230;background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.20);}
+    .btn.on{background:rgba(11,102,195,.18);border-color:rgba(11,102,195,.38);}
+    .select{border:1px solid var(--stroke2);background:rgba(255,255,255,.78);border-radius:999px;padding:7px 10px;font-weight:700;color:var(--brand2);font-size:11px;outline:none;cursor:pointer;font-family:inherit;}
+    .deck{margin-top:12px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));border:1px solid var(--stroke);border-radius:var(--round);box-shadow:var(--shadow);padding:14px;position:relative;}
+    .slide{background:rgba(255,255,255,.42);border:1px solid var(--stroke);border-radius:20px;padding:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;min-height:610px;position:relative;overflow:hidden;}
+    .left{padding:4px 4px 4px 6px;display:flex;flex-direction:column;overflow-y:auto;max-height:610px;}
+    .left::-webkit-scrollbar{width:4px;}
+    .left::-webkit-scrollbar-thumb{background:var(--stroke2);border-radius:99px;}
+    .kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0;}
+    .kicker .bar{width:34px;height:9px;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));box-shadow:0 0 0 5px rgba(11,102,195,.08);flex-shrink:0;}
+    .kicker span{font-weight:800;letter-spacing:.4px;font-size:11px;color:var(--brand2);text-transform:uppercase;}
+    h1{margin:0 0 8px 0;font-size:clamp(26px,3.2vw,42px);letter-spacing:-.6px;line-height:1.06;flex-shrink:0;}
+    .desc{margin:0 0 12px 0;color:var(--muted);font-size:14px;line-height:1.55;flex-shrink:0;}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;margin-bottom:10px;}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;margin-bottom:10px;}
+    .card{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px;}
+    .card strong{display:block;font-size:12.5px;margin-bottom:7px;color:var(--text);}
+    .card ul{margin:0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6;}
+    .card li{margin:3px 0;}
+    .bigcard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 14px;margin-top:10px;}
+    .bigcard:first-child{margin-top:0;}
+    .bigcard .title{font-weight:800;color:var(--brand2);margin-bottom:5px;font-size:13px;}
+    .bigcard ul{margin:4px 0 0 0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6;}
+    .bigcard li{margin:3px 0;}
+    .bigcard.green{border-color:rgba(22,163,74,.25);background:rgba(22,163,74,.06);}
+    .bigcard.green .title{color:var(--green);}
+    .bigcard.amber{border-color:rgba(217,119,6,.25);background:rgba(217,119,6,.06);}
+    .bigcard.amber .title{color:var(--amber);}
+    .bigcard.red{border-color:rgba(220,38,38,.20);background:rgba(220,38,38,.05);}
+    .bigcard.red .title{color:var(--red);}
+    .right{border-radius:18px;border:1px solid var(--stroke);background:radial-gradient(400px 260px at 70% 15%,rgba(255,255,255,.88),rgba(255,255,255,.0) 65%),linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.16));padding:13px;display:flex;flex-direction:column;gap:11px;}
+    .media{background:rgba(255,255,255,.62);border:1px solid var(--stroke);border-radius:16px;padding:10px;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:200px;}
+    .media img{max-width:100%;max-height:100%;border-radius:12px;display:none;box-shadow:0 16px 38px rgba(15,23,42,.16);object-fit:cover;}
+    .media .placeholder{color:var(--muted);font-size:12px;text-align:center;padding:16px;line-height:1.6;}
+    .rightBottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0;}
+    .miniCard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px;}
+    .miniCard .label{color:var(--muted);font-size:11px;margin-bottom:4px;font-weight:600;}
+    .miniCard .value{font-weight:900;font-size:18px;color:var(--text);letter-spacing:-.2px;line-height:1.2;}
+    .controls{margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.54));border:1px solid var(--stroke);border-radius:16px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+    .nav{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+    .progressWrap{flex:1;display:flex;align-items:center;gap:10px;padding:0 8px;min-width:0;}
+    .progressTrack{height:9px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(185,200,218,.7);overflow:hidden;flex:1;min-width:60px;}
+    .progressBar{height:100%;width:5%;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));transition:width .35s cubic-bezier(.4,0,.2,1);}
+    .hint{color:var(--muted);font-size:11px;white-space:nowrap;flex-shrink:0;}
+    .revealBox{background:rgba(255,255,255,.72);border:1px dashed rgba(11,102,195,.35);border-radius:14px;padding:11px 13px;margin-top:8px;display:none;color:var(--muted);font-size:12.5px;line-height:1.65;}
+    .penCanvas{position:absolute;inset:0;pointer-events:none;z-index:50;border-radius:var(--round);}
+    .timerBadge{display:inline-flex;align-items:center;gap:6px;background:rgba(11,102,195,.10);border:1px solid rgba(11,102,195,.22);border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:700;color:var(--brand2);margin-bottom:8px;}
+    .debateBox{background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(11,102,195,.04));border:1px solid rgba(11,102,195,.22);border-left:4px solid var(--brand);border-radius:14px;padding:12px 14px;margin-top:10px;}
+    .debateBox .dtitle{font-weight:800;font-size:12.5px;color:var(--brand2);margin-bottom:5px;}
+    .debateBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0;}
+    .labBox{background:linear-gradient(135deg,rgba(22,163,74,.07),rgba(22,163,74,.02));border:1px solid rgba(22,163,74,.22);border-left:4px solid var(--green);border-radius:14px;padding:12px 14px;margin-top:10px;}
+    .labBox .ltitle{font-weight:800;font-size:12.5px;color:var(--green);margin-bottom:5px;}
+    .labBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0;}
+    .stepList{counter-reset:step;list-style:none;padding:0;margin:8px 0 0 0;}
+    .stepList li{counter-increment:step;display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.55;margin:6px 0;}
+    .stepList li::before{content:counter(step);min-width:22px;height:22px;border-radius:999px;background:rgba(11,102,195,.12);color:var(--brand2);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    code{font-family:monospace;background:rgba(15,23,42,.07);border:1px solid rgba(15,23,42,.1);border-radius:5px;padding:1px 5px;font-size:11.5px;color:var(--brand2);}
+    @media(max-width:1100px){.slide{grid-template-columns:1fr;min-height:unset;}.right{gap:10px;}.right .media{min-height:240px;flex:unset;height:240px;}.left{max-height:unset;overflow:visible;}.actions .pill{display:none;}}
+    @media(max-width:700px){body{padding:10px;}.topbar{padding:10px 12px;}.brand img{height:30px;}.select{display:none;}h1{font-size:22px;}.grid{grid-template-columns:1fr;}.slide{padding:12px;}.deck{padding:10px;}.progressWrap{order:3;width:100%;padding:0;}.hint{display:none;}}
+    @media(max-width:480px){.rightBottom{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <img id="logo" src="../logo-cenfo.png" alt="CENFOTEC" onerror="this.style.display='none'"/>
+      <div class="txt">
+        <b>Sistema Operativo Windows y Redes de Windows</b>
+        <span>TI-313 · Semana 3 — Soporte Técnico III</span>
+      </div>
+    </div>
+    <div class="topcenter">
+      <div class="counterPill"><span class="dot"></span><span id="counterTxt">01 / 18</span></div>
+    </div>
+    <div class="actions">
+      <div class="pill"><span class="miniDot"></span><span>Presencial</span></div>
+      <div class="pill"><span class="miniDot" style="background:rgba(22,163,74,.7)"></span><span>Lab: VirtualBox</span></div>
+      <button class="btn primary" id="penToggle">✏️ Lápiz</button>
+      <button class="btn danger" id="penClear">Borrar</button>
+      <select class="select" id="penSize"><option value="3">Fino</option><option value="5" selected>Medio</option><option value="8">Grueso</option><option value="12">Extra</option></select>
+      <select class="select" id="penColor"><option value="#0b66c3" selected>Azul</option><option value="#0f172a">Negro</option><option value="#dc2626">Rojo</option><option value="#16a34a">Verde</option><option value="#f59e0b">Amarillo</option></select>
+    </div>
+  </div>
+
+  <div class="deck">
+    <canvas id="penCanvas" class="penCanvas"></canvas>
+    <div class="slide">
+      <div class="left">
+        <div class="kicker"><div class="bar"></div><span id="kicker">SEMANA 3</span></div>
+        <h1 id="title">TI-313 · Semana 3</h1>
+        <p class="desc" id="desc">Sistema Operativo Windows y Redes de Windows.</p>
+        <div id="leftBlocks"></div>
+      </div>
+      <div class="right">
+        <div class="media"><img id="slideImg" alt=""/><div class="placeholder" id="placeholder">Imagen de la slide</div></div>
+        <div class="rightBottom" id="rightBottom"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="nav">
+        <button class="btn" id="prevBtn">← Anterior</button>
+        <button class="btn primary" id="nextBtn">Siguiente →</button>
+      </div>
+      <div class="progressWrap">
+        <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
+        <div class="hint">Teclas: ← → / Espacio</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function pad2(n){return String(n).padStart(2,"0");}
+  const slides = [
+
+    /* 1 · Portada */
+    {kicker:"SEMANA 3",title:"Sistema Operativo Windows y Redes",
+    desc:"Administración completa de Windows: panel de control, usuarios, herramientas administrativas, comandos CLI y redes.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card"><strong>Datos del curso</strong><ul><li>Código: TI-313</li><li>Semana 3 de 4</li><li>Modalidad: Presencial</li><li>Prerequisito: Sem 2 completa</li></ul></div>
+        <div class="card"><strong>Docente</strong><ul><li>Ing. Jeremy Alvarado B.</li><li>Cel: 8573-9967</li><li>jalvarado@ucenfotec.ac.cr</li></ul></div>
+      </div>
+      <div class="bigcard">
+        <div class="title">Contenidos hoy</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.7">
+          🖥 <b>Windows:</b> Escritorio, explorador, panel de control, cuentas<br>
+          🔧 <b>Herramientas:</b> Adm. Tareas, Servicios, Visor de eventos<br>
+          ⌨️ <b>CLI:</b> ipconfig, netstat, sfc, diskpart, tasklist y más<br>
+          🌐 <b>Redes Windows:</b> Compartir carpetas, impresoras, RDP<br>
+          🧪 <b>CP3:</b> Configuración completa del SO en VMs del proyecto
+        </div>
+      </div>
+      <div class="bigcard red">
+        <div class="title">⚠️ Semana clave — Avance del proyecto</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Esta semana deben configurar el sistema operativo de sus VMs con los módulos 3 y 4 del proyecto. Semana 4 es entrega final.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Semana",av:"3 de 4",bk:"Próxima",bv:"Entrega proyecto"},
+    imgFile:"images/portada.svg"},
+
+    /* 2 · Agenda */
+    {kicker:"AGENDA",title:"¿Qué hacemos hoy?",
+    desc:"Semana 3 · Windows y Redes — ~194 minutos efectivos de clase.",
+    leftBlocksHTML:`
+      <div class="timerBadge">⏱ Clase 3 · ~194 minutos efectivos</div>
+      <div class="bigcard green">
+        <div class="title">📖 Bloque A — Teoría (48 min)</div>
+        <ul>
+          <li>Windows: escritorio, explorador y atajos de teclado</li>
+          <li>Panel de Control: categorías y utilidades clave</li>
+          <li>Administración de cuentas y usuarios (tipos)</li>
+          <li>Herramientas administrativas del sistema</li>
+          <li>Comandos CLI imprescindibles para soporte</li>
+          <li>Redes de Windows: compartir e instalar apps</li>
+        </ul>
+      </div>
+      <div style="background:rgba(148,163,184,.12);border:1px solid rgba(148,163,184,.35);border-radius:12px;padding:9px 13px;margin-top:10px;">
+        <div style="font-weight:800;font-size:12px;color:#64748b;">☕ Receso — 10 min</div>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">🧪 Bloque B — Caso Práctico 3 (96 min)</div>
+        <ul>
+          <li>Configurar Panel de Control en VM del proyecto</li>
+          <li>Crear usuarios y asignar permisos</li>
+          <li>Compartir carpeta entre VM1 y VM2</li>
+          <li>Configurar y probar RDP entre VMs</li>
+          <li>Ejecutar comandos CLI de diagnóstico</li>
+        </ul>
+      </div>
+      <div class="bigcard">
+        <div class="title">💬 Bloque C — Retro + Proyecto (40 min)</div>
+        <ul><li>Revisión CP3 · Dudas del proyecto · Recordatorio Semana 4</li></ul>
+      </div>`,
+    rightBadges:{ak:"CP3 hoy",av:"15%",bk:"Última semana",bv:"Sem 4 = entrega"},
+    imgFile:"images/agenda.svg"},
+
+    /* 3 · Escritorio y panel */
+    {kicker:"WINDOWS — ESCRITORIO",title:"Escritorio, Panel de Control y Explorador",
+    desc:"El escritorio de Windows es el punto de entrada al sistema. Dominarlo ahorra tiempo y permite diagnóstico más rápido.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card">
+          <strong>🖥 Escritorio Windows</strong>
+          <ul>
+            <li>Barra de tareas: inicio, apps, bandeja</li>
+            <li>Clic derecho → Personalizar/Opciones de pantalla</li>
+            <li><code>Win+D</code> → Mostrar escritorio</li>
+            <li><code>Win+I</code> → Configuración</li>
+            <li><code>Win+R</code> → Ejecutar</li>
+            <li><code>Win+X</code> → Menú avanzado</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>📁 Explorador de archivos</strong>
+          <ul>
+            <li><code>Win+E</code> → Abrir explorador</li>
+            <li>Ver → Extensiones de nombre · Elem. ocultos</li>
+            <li>Acceso rápido: anclar carpetas frecuentes</li>
+            <li>Este equipo · Red · OneDrive</li>
+            <li>Ruta: copiar desde barra de dirección</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard">
+        <div class="title">Panel de Control — Accesos clave (Win+R)</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.8">
+          <code>control</code> Panel de Control completo &nbsp;·&nbsp;
+          <code>ncpa.cpl</code> Adaptadores de red<br>
+          <code>appwiz.cpl</code> Programas y características &nbsp;·&nbsp;
+          <code>sysdm.cpl</code> Propiedades del sistema<br>
+          <code>firewall.cpl</code> Firewall &nbsp;·&nbsp;
+          <code>desk.cpl</code> Pantalla &nbsp;·&nbsp;
+          <code>timedate.cpl</code> Fecha y hora
+        </div>
+      </div>
+      <div class="debateBox">
+        <div class="dtitle">🗣 Reto rápido (2 min)</div>
+        <p>Sin mouse: ¿cómo abrís el administrador de tareas, el explorador de archivos y los adaptadores de red usando solo el teclado?</p>
+      </div>`,
+    rightBadges:{ak:"Menú avanzado",av:"Win + X",bk:"Adaptadores red",bv:"ncpa.cpl"},
+    imgFile:"images/panel-control.svg"},
+
+    /* 4 · Cuentas y usuarios */
+    {kicker:"USUARIOS Y CUENTAS",title:"Administración de cuentas y usuarios",
+    desc:"La gestión de cuentas es fundamental en soporte técnico: definir correctamente los tipos de usuario evita brechas de seguridad.",
+    leftBlocksHTML:`
+      <div class="grid3">
+        <div class="card">
+          <strong>👑 Administrador</strong>
+          <ul>
+            <li>Control total del sistema</li>
+            <li>Instalar/desinstalar software</li>
+            <li>Modificar configuración del sistema</li>
+            <li>Gestionar otros usuarios</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>👤 Estándar</strong>
+          <ul>
+            <li>Usar apps instaladas</li>
+            <li>Cambiar configuración personal</li>
+            <li>No puede instalar software del sistema</li>
+            <li>No puede cambiar hora/red/usuarios</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>👥 Invitado</strong>
+          <ul>
+            <li>Acceso muy limitado</li>
+            <li>Sin guardar configuración</li>
+            <li>Deshabilitado por defecto en W10/11</li>
+            <li>Riesgo de seguridad si se activa</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard">
+        <div class="title">Herramientas de gestión de usuarios</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.8">
+          <code>netplwiz</code> → Gestión básica de cuentas<br>
+          <code>lusrmgr.msc</code> → Usuarios y grupos locales (avanzado)<br>
+          Panel de Control → Cuentas de usuario → Administrar otra cuenta<br>
+          Configuración → Cuentas → Familia y otros usuarios
+        </div>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">⚠️ UAC — Control de Cuentas de Usuario</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.6">
+          El UAC solicita confirmación antes de cambios críticos. Nunca deshabilitarlo completamente — reduce el nivel de protección del sistema.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Usuarios cmd",av:"lusrmgr.msc",bk:"Protección",bv:"UAC activado"},
+    imgFile:"images/panel-control.svg"},
+
+    /* 5 · Herramientas admin */
+    {kicker:"HERRAMIENTAS ADMIN",title:"Herramientas administrativas del sistema",
+    desc:"Windows incluye un conjunto de herramientas MMC que permiten al técnico gestionar y diagnosticar el sistema en profundidad.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card">
+          <strong>📊 Administrador de tareas <code>Ctrl+Shift+Esc</code></strong>
+          <ul>
+            <li>Procesos: ver uso de CPU/RAM por app</li>
+            <li>Rendimiento: gráficos en tiempo real</li>
+            <li>Inicio: gestionar apps de arranque</li>
+            <li>Servicios: iniciar/detener servicios</li>
+            <li>Usuarios: sesiones activas</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>⚙️ Servicios <code>services.msc</code></strong>
+          <ul>
+            <li>Tipo de inicio: Auto / Manual / Deshabilitado</li>
+            <li>Reiniciar servicio caído</li>
+            <li>Print Spooler: servicio de impresión</li>
+            <li>Windows Update / DHCP Client</li>
+            <li>Dependencias entre servicios</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>📋 Visor de eventos <code>eventvwr.msc</code></strong>
+          <ul>
+            <li>Registros: Sistema, Aplicación, Seguridad</li>
+            <li>Error / Advertencia / Información</li>
+            <li>Event ID para buscar soluciones online</li>
+            <li>Filtrar por fecha y nivel</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🖥 Adm. de equipos <code>compmgmt.msc</code></strong>
+          <ul>
+            <li>Todo en uno: Visor, Servicios, Discos</li>
+            <li>Usuarios y grupos locales</li>
+            <li>Administración de discos</li>
+            <li>Carpetas compartidas</li>
+          </ul>
+        </div>
+      </div>
+      <div class="debateBox">
+        <div class="dtitle">🗣 Caso práctico rápido (2 min)</div>
+        <p>La impresora dejó de funcionar aunque está encendida y conectada. ¿Qué servicio revisarías y cómo lo reiniciarías desde services.msc?</p>
+      </div>`,
+    rightBadges:{ak:"Todo en uno",av:"compmgmt.msc",bk:"Ver logs",bv:"eventvwr.msc"},
+    imgFile:"images/herramientas-admin.svg"},
+
+    /* 6 · CLI comandos */
+    {kicker:"CLI — COMANDOS",title:"Comandos CLI esenciales para soporte",
+    desc:"El técnico de soporte debe dominar la línea de comandos. Muchos diagnósticos y reparaciones se hacen más rápido por CMD que por la interfaz gráfica.",
+    leftBlocksHTML:`
+      <div class="bigcard">
+        <div class="title">🌐 Red — Los más usados en soporte</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.9">
+          <code>ipconfig</code> Ver IP actual &nbsp;·&nbsp; <code>ipconfig /all</code> Info completa<br>
+          <code>ipconfig /flushdns</code> Limpiar caché DNS (soluciona páginas que no cargan)<br>
+          <code>ipconfig /release</code> Liberar IP &nbsp;·&nbsp; <code>ipconfig /renew</code> Solicitar nueva IP<br>
+          <code>ping 8.8.8.8</code> Probar conectividad &nbsp;·&nbsp; <code>tracert google.com</code> Ruta de paquetes<br>
+          <code>netstat -an</code> Puertos activos &nbsp;·&nbsp; <code>nslookup dominio</code> Resolver DNS
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <strong>⚙️ Sistema</strong>
+          <ul>
+            <li><code>systeminfo</code> Info del equipo</li>
+            <li><code>sfc /scannow</code> Reparar SO</li>
+            <li><code>DISM /Online /Cleanup-Image /RestoreHealth</code></li>
+            <li><code>winver</code> Versión de Windows</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🔄 Procesos y disco</strong>
+          <ul>
+            <li><code>tasklist</code> Listar procesos</li>
+            <li><code>taskkill /PID x /F</code> Terminar proceso</li>
+            <li><code>chkdsk C: /f</code> Verificar disco</li>
+            <li><code>diskpart</code> Gestión avanzada</li>
+          </ul>
+        </div>
+      </div>`,
+    rightBadges:{ak:"Reparar SO",av:"sfc /scannow",bk:"Limpiar DNS",bv:"flushdns"},
+    imgFile:"images/cli-comandos.svg"},
+
+    /* 7 · Instalacion apps y discos */
+    {kicker:"APPS Y DISCOS",title:"Instalación de apps y gestión de discos",
+    desc:"Un técnico debe poder instalar, desinstalar y gestionar el almacenamiento del equipo con herramientas gráficas y de línea de comandos.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card">
+          <strong>📦 Instalar aplicaciones</strong>
+          <ul>
+            <li>Descargar instalador (.exe / .msi)</li>
+            <li>Ejecutar como Administrador (clic derecho)</li>
+            <li>Aceptar UAC y seguir asistente</li>
+            <li>Reiniciar si se solicita</li>
+            <li>Verificar en Apps o Panel de Control</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🗑 Desinstalar aplicaciones</strong>
+          <ul>
+            <li>Panel de Control → Programas → Desinstalar</li>
+            <li>Configuración → Aplicaciones</li>
+            <li><code>appwiz.cpl</code> → acceso directo</li>
+            <li>Herramientas de limpieza (Revo Uninstaller)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>💾 Sistemas de archivos</strong>
+          <ul>
+            <li>NTFS: permisos, cifrado, grandes archivos</li>
+            <li>FAT32: compatible, máx archivo 4 GB</li>
+            <li>exFAT: USB/SD, sin límite de 4 GB</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🔧 Herramientas de disco</strong>
+          <ul>
+            <li><code>diskmgmt.msc</code> Administración GUI</li>
+            <li><code>diskpart</code> CLI avanzado</li>
+            <li><code>chkdsk /f /r</code> Reparar errores</li>
+            <li><code>sfc /scannow</code> Archivos del SO</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">⚠️ Windows Update</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.6">
+          Configuración → Windows Update → Buscar actualizaciones.<br>
+          Para desinstalar actualización problemática: Ver historial → Desinstalar actualizaciones.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Disco GUI",av:"diskmgmt.msc",bk:"Reparar errores",bv:"chkdsk /f /r"},
+    imgFile:"images/apps-discos.svg"},
+
+    /* 8 · Redes Windows */
+    {kicker:"REDES DE WINDOWS",title:"Compartir recursos y acceso remoto",
+    desc:"Windows permite compartir carpetas, impresoras y acceder remotamente entre equipos de la misma red de forma nativa.",
+    leftBlocksHTML:`
+      <div class="bigcard green">
+        <div class="title">📁 Compartir carpeta en red</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.7">
+          1. Clic derecho en carpeta → Propiedades → pestaña Compartir<br>
+          2. Agregar usuarios o "Todos" con permiso Leer / Leer+Escribir<br>
+          3. Desde otro equipo: <code>\\\\192.168.56.10\\NombreCarpeta</code><br>
+          4. O: Explorador → Conectar a unidad de red → asignar letra (Z:)
+        </div>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">🖨 Compartir impresora</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.6">
+          Panel de Control → Dispositivos e impresoras → clic derecho → Propiedades de impresora → Uso compartido<br>
+          Desde cliente: Agregar impresora → Impresora de red → <code>\\\\IP\\NombreImpresora</code>
+        </div>
+      </div>
+      <div class="bigcard">
+        <div class="title">🖥 Escritorio remoto (RDP)</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.6">
+          Habilitar: Panel de Control → Sistema → Configuración de acceso remoto → "Permitir conexiones remotas"<br>
+          Cliente: <code>mstsc</code> → ingresar IP → Conectar → credenciales del usuario<br>
+          Puerto: TCP 3389 · Firewall debe permitirlo · Solo cuentas con contraseña
+        </div>
+      </div>`,
+    rightBadges:{ak:"RDP puerto",av:"TCP 3389",bk:"Acceso red",bv:"\\\\IP\\Carpeta"},
+    imgFile:"images/redes-windows.svg"},
+
+    /* 9 · Config red cableada */
+    {kicker:"RED CABLEADA E INALÁMBRICA",title:"Configuración de interfaces de red en Windows",
+    desc:"Todo técnico debe poder configurar manualmente una interfaz de red, ya sea cableada o inalámbrica, dentro del sistema operativo Windows.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card">
+          <strong>🔌 Red cableada — IP estática</strong>
+          <ul>
+            <li>Panel de Control → Centro de redes</li>
+            <li>Cambiar configuración del adaptador</li>
+            <li>Clic derecho Ethernet → Propiedades</li>
+            <li>TCP/IPv4 → Usar IP siguiente</li>
+            <li>IP / Máscara / Gateway / DNS</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>📡 Red inalámbrica (Wi-Fi)</strong>
+          <ul>
+            <li>Centro de redes → Wi-Fi → Administrar redes</li>
+            <li>Conectar a red oculta: nombre manual</li>
+            <li>Ver contraseña guardada: propiedades</li>
+            <li>Prioridad de redes en Windows 11</li>
+            <li><code>netsh wlan show profiles</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard">
+        <div class="title">Diagnóstico de red paso a paso</div>
+        <ol class="stepList">
+          <li>Verificar cable/Wi-Fi conectado físicamente</li>
+          <li><code>ipconfig</code> — verificar IP asignada (si es 169.254.x.x → problema DHCP)</li>
+          <li><code>ping 127.0.0.1</code> — tarjeta de red funciona (loopback)</li>
+          <li><code>ping 192.168.x.1</code> — probar gateway/router local</li>
+          <li><code>ping 8.8.8.8</code> — probar internet (si falla → ISP o router)</li>
+          <li><code>ping google.com</code> — probar DNS (si falla → DNS corrupto)</li>
+          <li><code>ipconfig /flushdns</code> luego <code>ipconfig /renew</code></li>
+        </ol>
+      </div>`,
+    rightBadges:{ak:"Sin DHCP",av:"169.254.x.x",bk:"Diagnóstico",bv:"7 pasos"},
+    imgFile:"images/redes-windows.svg"},
+
+    /* 10 · Protocolos acceso remoto */
+    {kicker:"ACCESO REMOTO",title:"Protocolos de acceso remoto",
+    desc:"El acceso remoto permite a los técnicos gestionar equipos a distancia. Conocer los protocolos y sus puertos es esencial para el soporte.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card">
+          <strong>🖥 RDP — Remote Desktop Protocol</strong>
+          <ul>
+            <li>Puerto: TCP 3389</li>
+            <li>Acceso gráfico completo al escritorio</li>
+            <li>Nativo en Windows (mstsc.exe)</li>
+            <li>Requiere: usuario con contraseña + permiso</li>
+            <li>Cifrado integrado TLS</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🔒 SSH — Secure Shell</strong>
+          <ul>
+            <li>Puerto: TCP 22</li>
+            <li>Acceso a línea de comandos (CLI)</li>
+            <li>Cifrado fuerte (asimétrico)</li>
+            <li>Disponible en Windows 10+ (OpenSSH)</li>
+            <li>Ideal para servidores Linux</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🕹 VNC — Virtual Network Computing</strong>
+          <ul>
+            <li>Puerto: TCP 5900</li>
+            <li>Acceso gráfico multiplataforma</li>
+            <li>Open source (TightVNC, RealVNC)</li>
+            <li>Menor rendimiento que RDP</li>
+            <li>Útil cuando RDP no está disponible</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🔗 Telnet (legacy)</strong>
+          <ul>
+            <li>Puerto: TCP 23</li>
+            <li>Sin cifrado — inseguro</li>
+            <li>Solo para diagnóstico de puertos</li>
+            <li><code>telnet IP puerto</code> → prueba conexión</li>
+            <li>Reemplazado por SSH</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard green">
+        <div class="title">✅ Habilitar RDP en Windows (CP3)</div>
+        <div style="color:var(--muted);font-size:12.5px;line-height:1.6">
+          <code>sysdm.cpl</code> → Acceso remoto → Permitir conexiones RDP<br>
+          Firewall: Permitir app → Escritorio remoto → Habilitado<br>
+          Desde cliente: <code>mstsc</code> → IP → Usuario/contraseña del equipo remoto
+        </div>
+      </div>`,
+    rightBadges:{ak:"RDP puerto",av:"3389",bk:"Seguro es",bv:"SSH (22)"},
+    imgFile:"images/redes-windows.svg"},
+
+    /* 11 · Pausa */
+    {kicker:"PAUSA ACTIVA",title:"Pausa activa — 10 minutos",
+    desc:"Descanso. Volvemos con el Caso Práctico 3 en VirtualBox.",
+    leftBlocksHTML:`
+      <div class="bigcard green">
+        <div class="title">✅ Lo que vimos hasta aquí</div>
+        <ul>
+          <li>Escritorio Windows: atajos y explorador</li>
+          <li>Panel de Control y accesos rápidos Win+R</li>
+          <li>Tipos de cuentas: admin, estándar, invitado</li>
+          <li>Herramientas: Adm. Tareas, Servicios, Eventos</li>
+          <li>Comandos CLI: ipconfig, netstat, sfc, diskpart</li>
+          <li>Instalar/desinstalar apps y gestión de discos</li>
+          <li>Compartir carpetas e impresoras en red</li>
+          <li>RDP, SSH, VNC — protocolos de acceso remoto</li>
+          <li>Configuración de red cableada e inalámbrica</li>
+        </ul>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">⏭ Al volver</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Iniciamos el <b>Caso Práctico 3</b> usando las VMs que ya tienen con Windows instalado.
+          Asegúrense de que ambas VMs están encendidas y se comunican por ping.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Duración",av:"10 minutos",bk:"Siguiente",bv:"CP3 en VMs"},
+    imgFile:"images/portada.svg"},
+
+    /* 12 · CP3 Intro */
+    {kicker:"CASO PRÁCTICO 3",title:"Laboratorio — Administración del SO Windows",
+    desc:"Configuración completa del sistema operativo Windows en las VMs del proyecto DataTec S.A.",
+    leftBlocksHTML:`
+      <div class="labBox">
+        <div class="ltitle">🧪 Herramienta: VirtualBox + Windows</div>
+        <p>Usen las VMs creadas en el CP2. Si no las tienen funcionando, el docente tiene una VM base para clonar y empezar desde ahí.</p>
+      </div>
+      <div class="bigcard">
+        <div class="title">📋 Escenario del caso</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          DataTec S.A. necesita que las dos estaciones de trabajo virtuales tengan configurado su sistema operativo correctamente:
+          cuentas de usuario por departamento, carpeta compartida entre ambas estaciones, impresora de red configurada
+          y acceso remoto habilitado para soporte.
+        </div>
+      </div>
+      <div class="bigcard">
+        <div class="title">🎯 Objetivos del laboratorio</div>
+        <ul>
+          <li>Crear usuarios con distintos tipos de cuenta</li>
+          <li>Configurar Panel de Control (red, pantalla, energía)</li>
+          <li>Compartir carpeta entre VM1 y VM2</li>
+          <li>Habilitar y probar RDP entre VMs</li>
+          <li>Ejecutar comandos CLI de diagnóstico</li>
+          <li>Documentar con capturas de pantalla</li>
+        </ul>
+      </div>`,
+    rightBadges:{ak:"Grupos de",av:"3–4 personas",bk:"Duración",bv:"~96 min"},
+    imgFile:"images/panel-control.svg"},
+
+    /* 13 · Instrucciones CP3 */
+    {kicker:"INSTRUCCIONES CP3",title:"Pasos del laboratorio — Caso 3",
+    desc:"Sigan este orden. Documenten con capturas cada paso completado.",
+    leftBlocksHTML:`
+      <div class="bigcard">
+        <div class="title">Paso a paso</div>
+        <ol class="stepList">
+          <li>En VM1: crear usuario estándar "SoporteTI" con contraseña. Verificar que no tiene derechos de administrador. Captura del panel de usuarios.</li>
+          <li>Configurar Panel de Control en VM1: red, pantalla (resolución 1280×768), plan de energía "Alto rendimiento".</li>
+          <li>Crear carpeta "Compartida-GrupoX" en C:\. Compartirla en red con permiso de lectura/escritura para "Todos".</li>
+          <li>Desde VM2: acceder a la carpeta compartida de VM1 via <code>\\192.168.56.10\Compartida-GrupoX</code>. Crear un archivo de texto dentro. Verificar que VM1 lo ve.</li>
+          <li>En VM1: habilitar RDP. Verificar que el firewall permite el puerto 3389.</li>
+          <li>Desde VM2: abrir <code>mstsc</code> → IP: 192.168.56.10 → conectar con credenciales de administrador de VM1. Tomar captura de la sesión RDP activa.</li>
+          <li>En VM1: abrir CMD y ejecutar: <code>ipconfig /all</code> · <code>netstat -an</code> · <code>sfc /scannow</code>. Guardar la salida en un archivo .txt.</li>
+          <li>Completar tabla de documentación: usuarios creados, configuración de red, ruta de carpeta compartida, resultado de comandos.</li>
+        </ol>
+      </div>
+      <div class="debateBox">
+        <div class="dtitle">💡 Pregunta guía</div>
+        <p>¿Por qué crear un usuario "SoporteTI" estándar y no darle permisos de administrador? ¿Cuándo necesitaría ser admin?</p>
+      </div>`,
+    rightBadges:{ak:"Carpeta",av:"\\\\56.10\\...",bk:"RDP desde",bv:"mstsc en VM2"},
+    imgFile:"images/herramientas-admin.svg"},
+
+    /* 14 · Retroalimentación */
+    {kicker:"RETROALIMENTACIÓN",title:"Revisión del Caso Práctico 3",
+    desc:"Cada grupo comparte sus resultados. Analizamos errores frecuentes y mejores prácticas.",
+    leftBlocksHTML:`
+      <div class="bigcard green">
+        <div class="title">✅ ¿Qué revisamos?</div>
+        <ul>
+          <li>¿Los usuarios tienen el tipo de cuenta correcto?</li>
+          <li>¿La carpeta es accesible desde VM2?</li>
+          <li>¿El archivo creado en VM2 aparece en VM1?</li>
+          <li>¿La sesión RDP se estableció correctamente?</li>
+          <li>¿Los comandos CLI dieron resultados esperados?</li>
+        </ul>
+      </div>
+      <div class="bigcard">
+        <div class="title">💬 Discusión grupal (2 min por grupo)</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          1) ¿Qué problema encontraron y cómo lo resolvieron?<br>
+          2) ¿Por qué el RDP a veces no conecta aunque la IP es correcta?<br>
+          3) ¿Qué diferencia hay entre compartir con "Todos" vs usuario específico?
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+        <button class="btn primary" data-reveal="r1">Ver errores frecuentes</button>
+        <button class="btn" data-hide="r1">Ocultar</button>
+      </div>
+      <div class="revealBox" id="r1">
+        Errores comunes: RDP no conecta → firewall bloqueando 3389 o usuario sin contraseña. Carpeta no accesible → nombre de recurso mal escrito o servicio SMB apagado. Permisos insuficientes → compartir solo con lectura pero el test necesita escritura. sfc /scannow falla → ejecutar CMD como administrador.
+      </div>`,
+    rightBadges:{ak:"Por grupo",av:"2 minutos",bk:"Criterio",bv:"Evidencia"},
+    imgFile:"images/panel-control.svg"},
+
+    /* 15 · Avance proyecto */
+    {kicker:"PROYECTO DEL CURSO",title:"Avance del proyecto — Módulos 3 y 4",
+    desc:"Esta semana deben completar la configuración del SO Windows y la red en sus VMs del proyecto.",
+    leftBlocksHTML:`
+      <div class="bigcard">
+        <div class="title">📋 Módulos 3 y 4 — Windows y Redes</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Basado en el escenario de <b>DataTec S.A.</b>: configurar el SO completo según los criterios de la rúbrica del proyecto.
+        </div>
+      </div>
+      <div class="bigcard green">
+        <div class="title">✅ Entregables para Semana 4 (10 horas)</div>
+        <ul>
+          <li>Panel de Control configurado en ambas VMs</li>
+          <li>Cuentas de usuarios por departamento creadas</li>
+          <li>Recursos compartidos (carpetas + impresora virtual)</li>
+          <li>Red cableada configurada y verificada</li>
+          <li>Red inalámbrica: perfiles de Wi-Fi gestionados</li>
+          <li>RDP habilitado y funcional entre VMs</li>
+          <li>Documentación completa con capturas</li>
+        </ul>
+      </div>
+      <div class="bigcard red">
+        <div class="title">🔴 Recordatorio — Semana 4 es la ÚLTIMA</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          La Semana 4 se usa para finalizar y <b>defender el proyecto</b> en clase. No habrá tiempo de terminar en clase — el proyecto debe estar listo antes.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Tiempo",av:"10 horas",bk:"Rúbrica",bv:"6 criterios"},
+    imgFile:"images/portada.svg"},
+
+    /* 16 · Cierre */
+    {kicker:"CIERRE DE CLASE",title:"Resumen y próxima semana",
+    desc:"Semana 3 completada. Próxima clase: Mantenimiento preventivo, backup y entrega del proyecto.",
+    leftBlocksHTML:`
+      <div class="bigcard green">
+        <div class="title">✅ Lo que aprendimos hoy</div>
+        <ul>
+          <li>Escritorio y explorador de Windows con atajos</li>
+          <li>Panel de Control: categorías y accesos Win+R</li>
+          <li>Tipos de usuarios: admin, estándar, invitado</li>
+          <li>Administrador de Tareas, Servicios, Eventos</li>
+          <li>Comandos Win+R: msconfig, regedit, ncpa.cpl</li>
+          <li>CLI: ipconfig, netstat, sfc, diskpart, tasklist</li>
+          <li>Instalar/desinstalar apps y sistemas de archivos</li>
+          <li>Compartir carpetas e impresoras en red</li>
+          <li>RDP, SSH, VNC — protocolos de acceso remoto</li>
+          <li>Diagnóstico de red: 7 pasos sistemáticos</li>
+        </ul>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">📚 Semana 4 — Mantenimiento + Entrega Proyecto</div>
+        <ul>
+          <li>Redes Windows: continuación (protocolos remotos)</li>
+          <li>Mantenimiento preventivo del SO</li>
+          <li>Backup y restauración del sistema</li>
+          <li>Problemas comunes y soluciones avanzadas</li>
+          <li><b>Finalización y defensa del proyecto (55%)</b></li>
+        </ul>
+      </div>`,
+    rightBadges:{ak:"Próxima",av:"Semana 4",bk:"Avance",bv:"10 horas"},
+    imgFile:"images/cierre.svg"}
+  ];
+
+  /* DOM */
+  const elCounter=document.getElementById("counterTxt"),elKicker=document.getElementById("kicker"),
+    elTitle=document.getElementById("title"),elDesc=document.getElementById("desc"),
+    elLeft=document.getElementById("leftBlocks"),elRightBot=document.getElementById("rightBottom"),
+    elImg=document.getElementById("slideImg"),elPh=document.getElementById("placeholder"),
+    elProgress=document.getElementById("progressBar"),
+    prevBtn=document.getElementById("prevBtn"),nextBtn=document.getElementById("nextBtn");
+
+  function setSlideImage(src){
+    if(!src){elImg.style.display="none";elPh.style.display="block";return;}
+    elImg.style.display="none";elPh.style.display="block";elImg.src=src;
+    elImg.onload=()=>{elImg.style.display="block";elPh.style.display="none";};
+    elImg.onerror=()=>{elImg.style.display="none";elPh.textContent="Imagen no encontrada: "+src;};
+  }
+  function renderBadges(b){
+    elRightBot.innerHTML="";
+    const mk=(l,v)=>{const d=document.createElement("div");d.className="miniCard";d.innerHTML=`<div class="label">${l}</div><div class="value">${v}</div>`;return d;};
+    if(b?.ak)elRightBot.appendChild(mk(b.ak,b.av||""));
+    if(b?.bk)elRightBot.appendChild(mk(b.bk,b.bv||""));
+  }
+  function wireReveal(){
+    document.querySelectorAll("[data-reveal]").forEach(b=>{b.onclick=()=>{const e=document.getElementById(b.dataset.reveal);if(e)e.style.display="block";};});
+    document.querySelectorAll("[data-hide]").forEach(b=>{b.onclick=()=>{const e=document.getElementById(b.dataset.hide);if(e)e.style.display="none";};});
+  }
+  let idx=0;
+  function render(){
+    const s=slides[idx];
+    elCounter.textContent=`${pad2(idx+1)} / ${pad2(slides.length)}`;
+    elKicker.textContent=s.kicker||"";elTitle.textContent=s.title||"";elDesc.textContent=s.desc||"";
+    elLeft.innerHTML=s.leftBlocksHTML||"";
+    renderBadges(s.rightBadges||null);setSlideImage(s.imgFile||"");
+    elProgress.style.width=(((idx+1)/slides.length)*100)+"%";
+    wireReveal();clearPen();document.querySelector(".left").scrollTop=0;
+  }
+  function next(){if(idx<slides.length-1){idx++;render();}}
+  function prev(){if(idx>0){idx--;render();}}
+  nextBtn.addEventListener("click",next);prevBtn.addEventListener("click",prev);
+  window.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();next();}
+    if(e.key==="ArrowLeft"){e.preventDefault();prev();}
+  });
+
+  /* PEN */
+  const canvas=document.getElementById("penCanvas"),
+    penToggle=document.getElementById("penToggle"),penClear=document.getElementById("penClear"),
+    penSize=document.getElementById("penSize"),penColor=document.getElementById("penColor");
+  let penOn=false,drawing=false,last={x:0,y:0};
+  function resizeCanvas(){const deck=document.querySelector(".deck"),r=deck.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.floor(r.width*dpr);canvas.height=Math.floor(r.height*dpr);canvas.style.width=r.width+"px";canvas.style.height=r.height+"px";canvas.getContext("2d").setTransform(dpr,0,0,dpr,0,0);}
+  window.addEventListener("resize",resizeCanvas);
+  function getPos(ev){const r=document.querySelector(".deck").getBoundingClientRect(),src=ev.touches?ev.touches[0]:ev;return{x:src.clientX-r.left,y:src.clientY-r.top};}
+  function drawLine(a,b){const ctx=canvas.getContext("2d");ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=penColor.value;ctx.lineWidth=Number(penSize.value);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+  function clearPen(){canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);}
+  const deck=document.querySelector(".deck");
+  deck.addEventListener("mousedown",e=>{if(!penOn)return;drawing=true;last=getPos(e);e.preventDefault();});
+  deck.addEventListener("mousemove",e=>{if(!penOn||!drawing)return;const p=getPos(e);drawLine(last,p);last=p;e.preventDefault();});
+  window.addEventListener("mouseup",()=>{drawing=false;});
+  deck.addEventListener("touchstart",e=>{if(!penOn)return;drawing=true;last=getPos(e);e.preventDefault();},{passive:false});
+  deck.addEventListener("touchmove",e=>{if(!penOn||!drawing)return;const p=getPos(e);drawLine(last,p);last=p;e.preventDefault();},{passive:false});
+  window.addEventListener("touchend",()=>{drawing=false;});
+  penToggle.addEventListener("click",()=>{penOn=!penOn;canvas.style.pointerEvents=penOn?"auto":"none";penToggle.classList.toggle("on",penOn);penToggle.textContent=penOn?"✏️ Activo":"✏️ Lápiz";});
+  penClear.addEventListener("click",()=>clearPen());
+  resizeCanvas();render();
+})();
+</script>
+</body>
+</html>

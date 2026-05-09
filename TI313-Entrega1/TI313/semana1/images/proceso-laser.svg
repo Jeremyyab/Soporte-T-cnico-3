@@ -1,0 +1,68 @@
+<svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="340" fill="#fef2f2" rx="12"/>
+  <text x="260" y="30" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="700">Proceso de Impresión Láser</text>
+  <!-- Steps as connected boxes -->
+  <rect x="15" y="50" width="70" height="55" rx="8" fill="#dc2626" opacity="0.9"/>
+  <text x="50" y="73" text-anchor="middle" font-size="18">⚡</text>
+  <text x="50" y="90" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="600">1. Carga</text>
+  <text x="50" y="101" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">Tambor</text>
+  <line x1="85" y1="77" x2="100" y2="77" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+  <rect x="100" y="50" width="70" height="55" rx="8" fill="#dc2626" opacity="0.75"/>
+  <text x="135" y="73" text-anchor="middle" font-size="18">💡</text>
+  <text x="135" y="90" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="600">2. Exposición</text>
+  <text x="135" y="101" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">Láser/LED</text>
+  <line x1="170" y1="77" x2="185" y2="77" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="185" y="50" width="70" height="55" rx="8" fill="#dc2626" opacity="0.6"/>
+  <text x="220" y="73" text-anchor="middle" font-size="18">🎨</text>
+  <text x="220" y="90" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="600">3. Revelado</text>
+  <text x="220" y="101" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">Tóner</text>
+  <line x1="255" y1="77" x2="270" y2="77" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="270" y="50" width="70" height="55" rx="8" fill="#dc2626" opacity="0.45"/>
+  <text x="305" y="73" text-anchor="middle" font-size="18">📄</text>
+  <text x="305" y="90" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#7f1d1d" font-weight="600">4. Transferencia</text>
+  <text x="305" y="101" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7f1d1d">Al papel</text>
+  <line x1="340" y1="77" x2="355" y2="77" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="355" y="50" width="70" height="55" rx="8" fill="#dc2626" opacity="0.30"/>
+  <text x="390" y="73" text-anchor="middle" font-size="18">🔥</text>
+  <text x="390" y="90" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#7f1d1d" font-weight="600">5. Fusión</text>
+  <text x="390" y="101" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#7f1d1d">Calor+presión</text>
+  <line x1="425" y1="77" x2="440" y2="77" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="440" y="50" width="70" height="55" rx="8" fill="#16a34a" opacity="0.7"/>
+  <text x="475" y="73" text-anchor="middle" font-size="18">✅</text>
+  <text x="475" y="90" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white" font-weight="600">6. Limpieza</text>
+  <text x="475" y="101" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">Lista para usar</text>
+  <!-- Comparison table -->
+  <rect x="15" y="130" width="490" height="185" rx="10" fill="white" opacity="0.7" stroke="#dc2626" stroke-opacity="0.2"/>
+  <text x="260" y="155" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="700">Comparación: Láser vs Inkjet vs Térmica</text>
+  <line x1="15" y1="162" x2="505" y2="162" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="90" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b" font-weight="600">Característica</text>
+  <text x="230" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#dc2626" font-weight="600">Láser</text>
+  <text x="355" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#0b66c3" font-weight="600">Inkjet</text>
+  <text x="465" y="178" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#16a34a" font-weight="600">Térmica</text>
+  <line x1="15" y1="183" x2="505" y2="183" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="90" y="198" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Velocidad</text>
+  <text x="230" y="198" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Alta (20-60 ppm)</text>
+  <text x="355" y="198" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Media (5-15 ppm)</text>
+  <text x="465" y="198" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Muy alta</text>
+  <text x="90" y="215" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Costo/página</text>
+  <text x="230" y="215" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Bajo</text>
+  <text x="355" y="215" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Medio-Alto</text>
+  <text x="465" y="215" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Muy bajo</text>
+  <text x="90" y="232" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Calidad foto</text>
+  <text x="230" y="232" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Media</text>
+  <text x="355" y="232" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Excelente</text>
+  <text x="465" y="232" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">B/N solo</text>
+  <text x="90" y="249" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Consumible</text>
+  <text x="230" y="249" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Tóner</text>
+  <text x="355" y="249" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Tinta líquida</text>
+  <text x="465" y="249" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Papel especial</text>
+  <text x="90" y="266" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Uso ideal</text>
+  <text x="230" y="266" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Documentos masivos</text>
+  <text x="355" y="266" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Fotos, bajo vol.</text>
+  <text x="465" y="266" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Recibos, etiquetas</text>
+  <text x="90" y="300" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Mantenimiento</text>
+  <text x="230" y="300" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Bajo</text>
+  <text x="355" y="300" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Medio (cabezales)</text>
+  <text x="465" y="300" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">Mínimo</text>
+</svg>

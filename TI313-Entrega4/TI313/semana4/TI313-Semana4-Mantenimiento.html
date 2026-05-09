@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TI-313 · Semana 4 — Mantenimiento Preventivo y Proyecto Final</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+    :root{--bg1:#eaf1f8;--bg2:#cfdceb;--stroke:#cfd9e6;--stroke2:#b9c8da;--text:#0f172a;--muted:#50607a;--brand:#0b66c3;--brand2:#0a4f96;--accent:#0ea5e9;--green:#16a34a;--amber:#d97706;--red:#dc2626;--shadow:0 18px 45px rgba(15,23,42,.12);--round:22px;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;color:var(--text);background:radial-gradient(900px 500px at 30% 10%,#fff 0%,rgba(255,255,255,0) 60%),radial-gradient(800px 450px at 75% 65%,#fff 0%,rgba(255,255,255,0) 55%),linear-gradient(160deg,var(--bg1),var(--bg2));min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:16px;}
+    .shell{width:min(1400px,100%);position:relative;}
+    .topbar{background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.58));border:1px solid var(--stroke);border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;flex-shrink:0;}
+    .brand img{height:38px;width:auto;display:block;}
+    .brand .txt{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
+    .brand .txt b{font-size:13px;color:var(--brand2);letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .brand .txt span{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .topcenter{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;min-width:0;}
+    .counterPill{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);font-weight:800;color:var(--brand2);font-size:13px;white-space:nowrap;}
+    .dot{width:9px;height:9px;border-radius:999px;background:var(--brand);box-shadow:0 0 0 4px rgba(11,102,195,.12);flex-shrink:0;}
+    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;}
+    .pill{padding:7px 11px;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.65);color:var(--muted);display:flex;align-items:center;gap:7px;font-size:11px;user-select:none;white-space:nowrap;}
+    .pill .miniDot{width:8px;height:8px;border-radius:999px;background:rgba(11,102,195,.9);box-shadow:0 0 0 3px rgba(11,102,195,.10);flex-shrink:0;}
+    .btn{appearance:none;border:1px solid var(--stroke2);background:rgba(255,255,255,.78);color:var(--brand2);padding:7px 12px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;transition:.15s;user-select:none;white-space:nowrap;font-family:inherit;}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.95);box-shadow:0 4px 12px rgba(15,23,42,.08);}
+    .btn.primary{background:rgba(11,102,195,.10);border-color:rgba(11,102,195,.28);}
+    .btn.danger{color:#7a2230;background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.20);}
+    .btn.on{background:rgba(11,102,195,.18);border-color:rgba(11,102,195,.38);}
+    .select{border:1px solid var(--stroke2);background:rgba(255,255,255,.78);border-radius:999px;padding:7px 10px;font-weight:700;color:var(--brand2);font-size:11px;outline:none;cursor:pointer;font-family:inherit;}
+    .deck{margin-top:12px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));border:1px solid var(--stroke);border-radius:var(--round);box-shadow:var(--shadow);padding:14px;position:relative;}
+    .slide{background:rgba(255,255,255,.42);border:1px solid var(--stroke);border-radius:20px;padding:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:16px;min-height:610px;position:relative;overflow:hidden;}
+    .left{padding:4px 4px 4px 6px;display:flex;flex-direction:column;overflow-y:auto;max-height:610px;}
+    .left::-webkit-scrollbar{width:4px;}
+    .left::-webkit-scrollbar-thumb{background:var(--stroke2);border-radius:99px;}
+    .kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0;}
+    .kicker .bar{width:34px;height:9px;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));box-shadow:0 0 0 5px rgba(11,102,195,.08);flex-shrink:0;}
+    .kicker span{font-weight:800;letter-spacing:.4px;font-size:11px;color:var(--brand2);text-transform:uppercase;}
+    h1{margin:0 0 8px 0;font-size:clamp(26px,3.2vw,42px);letter-spacing:-.6px;line-height:1.06;flex-shrink:0;}
+    .desc{margin:0 0 12px 0;color:var(--muted);font-size:14px;line-height:1.55;flex-shrink:0;}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;margin-bottom:10px;}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;margin-bottom:10px;}
+    .card{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px;}
+    .card strong{display:block;font-size:12.5px;margin-bottom:7px;color:var(--text);}
+    .card ul{margin:0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6;}
+    .card li{margin:3px 0;}
+    .bigcard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 14px;margin-top:10px;}
+    .bigcard:first-child{margin-top:0;}
+    .bigcard .title{font-weight:800;color:var(--brand2);margin-bottom:5px;font-size:13px;}
+    .bigcard ul{margin:4px 0 0 0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.6;}
+    .bigcard li{margin:3px 0;}
+    .bigcard.green{border-color:rgba(22,163,74,.25);background:rgba(22,163,74,.06);}
+    .bigcard.green .title{color:var(--green);}
+    .bigcard.amber{border-color:rgba(217,119,6,.25);background:rgba(217,119,6,.06);}
+    .bigcard.amber .title{color:var(--amber);}
+    .bigcard.red{border-color:rgba(220,38,38,.20);background:rgba(220,38,38,.05);}
+    .bigcard.red .title{color:var(--red);}
+    .right{border-radius:18px;border:1px solid var(--stroke);background:radial-gradient(400px 260px at 70% 15%,rgba(255,255,255,.88),rgba(255,255,255,.0) 65%),linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.16));padding:13px;display:flex;flex-direction:column;gap:11px;}
+    .media{background:rgba(255,255,255,.62);border:1px solid var(--stroke);border-radius:16px;padding:10px;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:200px;}
+    .media img{max-width:100%;max-height:100%;border-radius:12px;display:none;box-shadow:0 16px 38px rgba(15,23,42,.16);object-fit:cover;}
+    .media .placeholder{color:var(--muted);font-size:12px;text-align:center;padding:16px;line-height:1.6;}
+    .rightBottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0;}
+    .miniCard{background:rgba(255,255,255,.68);border:1px solid var(--stroke);border-radius:14px;padding:11px 13px;}
+    .miniCard .label{color:var(--muted);font-size:11px;margin-bottom:4px;font-weight:600;}
+    .miniCard .value{font-weight:900;font-size:18px;color:var(--text);letter-spacing:-.2px;line-height:1.2;}
+    .controls{margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.54));border:1px solid var(--stroke);border-radius:16px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+    .nav{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+    .progressWrap{flex:1;display:flex;align-items:center;gap:10px;padding:0 8px;min-width:0;}
+    .progressTrack{height:9px;border-radius:999px;background:rgba(15,23,42,.06);border:1px solid rgba(185,200,218,.7);overflow:hidden;flex:1;min-width:60px;}
+    .progressBar{height:100%;width:5%;border-radius:999px;background:linear-gradient(90deg,var(--brand2),var(--accent));transition:width .35s cubic-bezier(.4,0,.2,1);}
+    .hint{color:var(--muted);font-size:11px;white-space:nowrap;flex-shrink:0;}
+    .revealBox{background:rgba(255,255,255,.72);border:1px dashed rgba(11,102,195,.35);border-radius:14px;padding:11px 13px;margin-top:8px;display:none;color:var(--muted);font-size:12.5px;line-height:1.65;}
+    .penCanvas{position:absolute;inset:0;pointer-events:none;z-index:50;border-radius:var(--round);}
+    .timerBadge{display:inline-flex;align-items:center;gap:6px;background:rgba(11,102,195,.10);border:1px solid rgba(11,102,195,.22);border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:700;color:var(--brand2);margin-bottom:8px;}
+    .debateBox{background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(11,102,195,.04));border:1px solid rgba(11,102,195,.22);border-left:4px solid var(--brand);border-radius:14px;padding:12px 14px;margin-top:10px;}
+    .debateBox .dtitle{font-weight:800;font-size:12.5px;color:var(--brand2);margin-bottom:5px;}
+    .debateBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0;}
+    .proyectoBox{background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(220,38,38,.03));border:1px solid rgba(220,38,38,.25);border-left:4px solid var(--red);border-radius:14px;padding:12px 14px;margin-top:10px;}
+    .proyectoBox .ptitle{font-weight:800;font-size:12.5px;color:var(--red);margin-bottom:5px;}
+    .proyectoBox p{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0;}
+    .stepList{counter-reset:step;list-style:none;padding:0;margin:8px 0 0 0;}
+    .stepList li{counter-increment:step;display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.55;margin:6px 0;}
+    .stepList li::before{content:counter(step);min-width:22px;height:22px;border-radius:999px;background:rgba(11,102,195,.12);color:var(--brand2);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    code{font-family:monospace;background:rgba(15,23,42,.07);border:1px solid rgba(15,23,42,.1);border-radius:5px;padding:1px 5px;font-size:11.5px;color:var(--brand2);}
+    @media(max-width:1100px){.slide{grid-template-columns:1fr;min-height:unset;}.right{gap:10px;}.right .media{min-height:240px;flex:unset;height:240px;}.left{max-height:unset;overflow:visible;}.actions .pill{display:none;}}
+    @media(max-width:700px){body{padding:10px;}.topbar{padding:10px 12px;}.brand img{height:30px;}.select{display:none;}h1{font-size:22px;}.grid{grid-template-columns:1fr;}.slide{padding:12px;}.deck{padding:10px;}.progressWrap{order:3;width:100%;padding:0;}.hint{display:none;}}
+    @media(max-width:480px){.rightBottom{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <img id="logo" src="../logo-cenfo.png" alt="CENFOTEC" onerror="this.style.display='none'"/>
+      <div class="txt">
+        <b>Mantenimiento Preventivo SO y Entrega del Proyecto</b>
+        <span>TI-313 · Semana 4 — Última clase del curso</span>
+      </div>
+    </div>
+    <div class="topcenter">
+      <div class="counterPill"><span class="dot"></span><span id="counterTxt">01 / 16</span></div>
+    </div>
+    <div class="actions">
+      <div class="pill"><span class="miniDot"></span><span>Presencial</span></div>
+      <div class="pill"><span class="miniDot" style="background:rgba(220,38,38,.7)"></span><span>Entrega Proyecto</span></div>
+      <button class="btn primary" id="penToggle">✏️ Lápiz</button>
+      <button class="btn danger" id="penClear">Borrar</button>
+      <select class="select" id="penSize"><option value="3">Fino</option><option value="5" selected>Medio</option><option value="8">Grueso</option><option value="12">Extra</option></select>
+      <select class="select" id="penColor"><option value="#0b66c3" selected>Azul</option><option value="#0f172a">Negro</option><option value="#dc2626">Rojo</option><option value="#16a34a">Verde</option><option value="#f59e0b">Amarillo</option></select>
+    </div>
+  </div>
+
+  <div class="deck">
+    <canvas id="penCanvas" class="penCanvas"></canvas>
+    <div class="slide">
+      <div class="left">
+        <div class="kicker"><div class="bar"></div><span id="kicker">SEMANA 4</span></div>
+        <h1 id="title">TI-313 · Semana 4 — Última clase</h1>
+        <p class="desc" id="desc">Mantenimiento preventivo, backup, solución de problemas avanzada y entrega del proyecto final.</p>
+        <div id="leftBlocks"></div>
+      </div>
+      <div class="right">
+        <div class="media"><img id="slideImg" alt=""/><div class="placeholder" id="placeholder">Imagen de la slide</div></div>
+        <div class="rightBottom" id="rightBottom"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="nav">
+        <button class="btn" id="prevBtn">← Anterior</button>
+        <button class="btn primary" id="nextBtn">Siguiente →</button>
+      </div>
+      <div class="progressWrap">
+        <div class="progressTrack"><div class="progressBar" id="progressBar"></div></div>
+        <div class="hint">Teclas: ← → / Espacio</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function pad2(n){return String(n).padStart(2,"0");}
+  const slides = [
+
+    /* 1 · Portada */
+    {kicker:"SEMANA 4 — ÚLTIMA CLASE",title:"Mantenimiento Preventivo y Entrega del Proyecto",
+    desc:"La clase final del curso TI-313. Cerramos con mantenimiento del SO y la presentación del proyecto grupal.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card"><strong>Datos del curso</strong><ul><li>Código: TI-313</li><li>Semana 4 de 4 (final)</li><li>Modalidad: Presencial</li><li>1 crédito académico</li></ul></div>
+        <div class="card"><strong>Docente</strong><ul><li>Ing. Jeremy Alvarado B.</li><li>Cel: 8573-9967</li><li>jalvarado@ucenfotec.ac.cr</li></ul></div>
+      </div>
+      <div class="bigcard">
+        <div class="title">Contenidos de hoy</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.7">
+          🔧 <b>Teoría (48 min):</b> Mantenimiento preventivo · Backup · BSOD · Problemas avanzados<br>
+          🏆 <b>Proyecto (96 min):</b> Presentación y defensa grupal — 10 min por grupo<br>
+          💬 <b>Cierre (40 min):</b> Retroalimentación final · Notas · Insignias digitales
+        </div>
+      </div>
+      <div class="proyectoBox">
+        <div class="ptitle">🔴 HOY ES LA ENTREGA DEL PROYECTO — 55% del curso</div>
+        <p>Cada grupo tiene 10 minutos de presentación + 5 minutos de preguntas del docente. El proyecto debe estar completamente funcional en VirtualBox.</p>
+      </div>`,
+    rightBadges:{ak:"Semana",av:"4 de 4 (FINAL)",bk:"Proyecto",bv:"55% hoy"},
+    imgFile:"images/portada.svg"},
+
+    /* 2 · Agenda */
+    {kicker:"AGENDA FINAL",title:"Agenda — Última clase del curso",
+    desc:"Semana 4 · Mantenimiento + Entrega del Proyecto — ~194 minutos efectivos.",
+    leftBlocksHTML:`
+      <div class="timerBadge">⏱ Última clase · ~194 minutos efectivos</div>
+      <div class="bigcard green">
+        <div class="title">📖 Bloque A — Teoría (48 min)</div>
+        <ul>
+          <li>Plan de mantenimiento preventivo del SO</li>
+          <li>Herramientas de limpieza y optimización</li>
+          <li>Backup: Historial de archivos, imagen del sistema, puntos de restauración</li>
+          <li>BSOD: causas, diagnóstico y solución</li>
+          <li>Proceso de solución de problemas (6 pasos)</li>
+          <li>Redes Windows: continuación (RDP avanzado)</li>
+        </ul>
+      </div>
+      <div style="background:rgba(148,163,184,.12);border:1px solid rgba(148,163,184,.35);border-radius:12px;padding:9px 13px;margin-top:10px;">
+        <div style="font-weight:800;font-size:12px;color:#64748b;">☕ Receso — 10 min</div>
+      </div>
+      <div class="proyectoBox">
+        <div class="ptitle">🏆 Bloque B — Entrega del Proyecto (96 min)</div>
+        <p>Cada grupo: 10 min de presentación técnica + 5 min de preguntas. Demo en VirtualBox obligatoria. Rubrica: 6 criterios × 10 puntos.</p>
+      </div>
+      <div class="bigcard">
+        <div class="title">💬 Bloque C — Cierre del curso (40 min)</div>
+        <ul><li>Retroalimentación colectiva · Notas finales · Insignias digitales</li></ul>
+      </div>`,
+    rightBadges:{ak:"Proyecto",av:"55% — HOY",bk:"Por grupo",bv:"15 min"},
+    imgFile:"images/agenda.svg"},
+
+    /* 3 · Mantenimiento preventivo */
+    {kicker:"MANTENIMIENTO PREVENTIVO",title:"Plan de mantenimiento preventivo del SO",
+    desc:"Un técnico de soporte debe establecer un plan de mantenimiento periódico para prevenir fallas antes de que ocurran.",
+    leftBlocksHTML:`
+      <div class="bigcard">
+        <div class="title">¿Por qué mantenimiento preventivo?</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Es más barato prevenir que reparar. Un equipo sin mantenimiento acumula archivos temporales,
+          fragmentación de disco, actualizaciones pendientes y vulnerabilidades de seguridad que eventualmente
+          generan fallas críticas o pérdida de datos.
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <strong>📅 Diario</strong>
+          <ul>
+            <li>Cerrar sesión al terminar</li>
+            <li>Verificar espacio libre en C:</li>
+            <li>Antivirus activo y al día</li>
+            <li>Guardar y hacer backup del trabajo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>📅 Semanal</strong>
+          <ul>
+            <li>Vaciar papelera y limpiar escritorio</li>
+            <li>Borrar archivos temporales (<code>%temp%</code>)</li>
+            <li>Ejecutar <code>cleanmgr</code></li>
+            <li>Revisar logs en Visor de Eventos</li>
+            <li>Reiniciar el equipo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>📅 Mensual</strong>
+          <ul>
+            <li>Instalar actualizaciones de Windows</li>
+            <li>Actualizar drivers del sistema</li>
+            <li>Desfragmentar HDD (no SSD)</li>
+            <li>Ejecutar <code>chkdsk /f</code></li>
+            <li>Crear punto de restauración</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>📅 Trimestral</strong>
+          <ul>
+            <li>Limpiar hardware (polvo, ventiladores)</li>
+            <li>Revisar temperatura del CPU</li>
+            <li>Auditar cuentas de usuario</li>
+            <li>Ejecutar <code>sfc /scannow</code></li>
+            <li>Revisar licencias del software</li>
+          </ul>
+        </div>
+      </div>`,
+    rightBadges:{ak:"Limpiar temps",av:"%temp%",bk:"Optimizar",bv:"cleanmgr"},
+    imgFile:"images/mantenimiento.svg"},
+
+    /* 4 · Herramientas optimizacion */
+    {kicker:"OPTIMIZACIÓN",title:"Herramientas de limpieza y optimización",
+    desc:"Windows incluye herramientas nativas para mantener el sistema limpio y rápido. Conocerlas ahorra tiempo y costos de soporte.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card">
+          <strong>🧹 Liberador de espacio</strong>
+          <ul>
+            <li><code>cleanmgr</code> → GUI de limpieza</li>
+            <li>Archivos temporales, papelera</li>
+            <li>Caché de miniaturas, logs</li>
+            <li>"Limpiar archivos de sistema" → más opciones</li>
+            <li>Desinstalar actualizaciones antiguas</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>⚡ Optimizar arranque</strong>
+          <ul>
+            <li>Adm. Tareas → Inicio: deshabilitar innecesarios</li>
+            <li><code>msconfig</code> → Servicios → Ocultar Microsoft</li>
+            <li>Deshabilitar efectos visuales en rendimiento bajo</li>
+            <li>Plan de energía: Alto rendimiento</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>💾 Disco</strong>
+          <ul>
+            <li>HDD: <code>defrag C: /U /V</code></li>
+            <li>SSD: NO desfragmentar — usar TRIM</li>
+            <li>Settings → Optimize Drives → automático</li>
+            <li><code>chkdsk C: /f /r</code> → reparar errores</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🔒 Seguridad</strong>
+          <ul>
+            <li>Windows Defender: escaneo completo</li>
+            <li>Actualizaciones de definiciones</li>
+            <li>Revisar Firewall y reglas activas</li>
+            <li>Auditar usuarios con acceso admin</li>
+          </ul>
+        </div>
+      </div>
+      <div class="debateBox">
+        <div class="dtitle">🗣 Debate rápido (2 min)</div>
+        <p>Un equipo con SSD va cada vez más lento aunque tiene espacio libre. ¿Cuáles serían las primeras 3 cosas que revisarías antes de formatear?</p>
+      </div>`,
+    rightBadges:{ak:"SSD: usar",av:"TRIM (no defrag)",bk:"Limpieza GUI",bv:"cleanmgr"},
+    imgFile:"images/mantenimiento.svg"},
+
+    /* 5 · Backup */
+    {kicker:"BACKUP Y RESTAURACIÓN",title:"Copia de seguridad y restauración del sistema",
+    desc:"El backup es la única protección real contra pérdida de datos. Un técnico debe conocer y configurar las opciones de respaldo de Windows.",
+    leftBlocksHTML:`
+      <div class="grid3">
+        <div class="card">
+          <strong>📁 Historial de archivos</strong>
+          <ul>
+            <li>Panel Control → Historial</li>
+            <li>Requiere disco externo</li>
+            <li>Versiones de documentos</li>
+            <li>Restaurar: clic derecho → Restaurar versiones anteriores</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>💿 Imagen del sistema</strong>
+          <ul>
+            <li>Panel Control → Copia de seguridad</li>
+            <li>Imagen completa del disco</li>
+            <li>Restaura todo el sistema</li>
+            <li><code>wbadmin</code> (CLI avanzado)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>⏮ Punto de restauración</strong>
+          <ul>
+            <li><code>sysdm.cpl</code> → Protección del sistema</li>
+            <li>NO guarda archivos personales</li>
+            <li>Solo configuración del SO</li>
+            <li><code>rstrui.exe</code> → restaurar</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard green">
+        <div class="title">✅ Regla 3-2-1 del Backup</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          <b>3</b> copias del dato · <b>2</b> medios diferentes (disco local + USB/nube) · <b>1</b> copia fuera del sitio (nube o disco en otra ubicación física)
+        </div>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">⚠️ Recuperación avanzada</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Configuración → Sistema → Recuperación → Inicio avanzado<br>
+          O: <b>Shift + Reiniciar</b> → Solucionar problemas → Opciones avanzadas
+        </div>
+      </div>`,
+    rightBadges:{ak:"Regla de oro",av:"3 - 2 - 1",bk:"Restaurar SO",bv:"rstrui.exe"},
+    imgFile:"images/backup.svg"},
+
+    /* 6 · BSOD */
+    {kicker:"BSOD Y PROBLEMAS AVANZADOS",title:"BSOD — Pantalla azul de la muerte",
+    desc:"El BSOD (Blue Screen of Death) indica un error crítico del sistema. Un técnico debe saber interpretarlo y encontrar la causa raíz.",
+    leftBlocksHTML:`
+      <div class="bigcard red">
+        <div class="title">¿Qué es un BSOD?</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Es un error crítico del kernel de Windows que no puede ser recuperado. El sistema se reinicia automáticamente y genera un archivo de volcado (minidump) en <code>C:\Windows\Minidump</code> que contiene la causa técnica.
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <strong>Causas comunes</strong>
+          <ul>
+            <li>Driver incompatible o corrompido</li>
+            <li>RAM defectuosa (<code>mdsched.exe</code>)</li>
+            <li>Disco con sectores dañados</li>
+            <li>Sobrecalentamiento</li>
+            <li>Actualización defectuosa del SO</li>
+            <li>Virus/malware en proceso del sistema</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>Stop codes frecuentes</strong>
+          <ul>
+            <li>CRITICAL_PROCESS_DIED</li>
+            <li>MEMORY_MANAGEMENT</li>
+            <li>IRQL_NOT_LESS_OR_EQUAL</li>
+            <li>PAGE_FAULT_IN_NONPAGED_AREA</li>
+            <li>SYSTEM_SERVICE_EXCEPTION</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard green">
+        <div class="title">✅ Qué hacer ante un BSOD</div>
+        <ol class="stepList">
+          <li>Anotar el Stop Code y buscar en support.microsoft.com</li>
+          <li>Revisar <code>C:\Windows\Minidump</code> con WinDbg</li>
+          <li>Arrancar en Modo Seguro y desinstalar último driver/update</li>
+          <li>Ejecutar <code>sfc /scannow</code> y <code>DISM /Online /Cleanup-Image /RestoreHealth</code></li>
+          <li>Si persiste: restaurar punto de restauración previo al error</li>
+        </ol>
+      </div>`,
+    rightBadges:{ak:"Volcado en",av:"C:\\Minidump",bk:"Diagnóstico",bv:"WinDbg"},
+    imgFile:"images/bsod-problemas.svg"},
+
+    /* 7 · Proceso solución de problemas */
+    {kicker:"SOLUCIÓN DE PROBLEMAS",title:"Proceso sistemático de resolución de problemas",
+    desc:"Un técnico eficiente no adivina — sigue un proceso estructurado que permite aislar la causa raíz y aplicar la solución correcta.",
+    leftBlocksHTML:`
+      <div class="bigcard">
+        <div class="title">Los 6 pasos del proceso técnico</div>
+        <ol class="stepList">
+          <li><b>Identificar el problema:</b> Escuchar al usuario. ¿Cuándo ocurre? ¿Qué mensaje exacto da? ¿Es reproducible? ¿Qué cambió recientemente?</li>
+          <li><b>Establecer una teoría de causa:</b> ¿Hardware? ¿Software? ¿Red? ¿Usuario? Descartar causas simples primero (cable, reinicio, login).</li>
+          <li><b>Probar la teoría:</b> Ejecutar el diagnóstico. Revisar logs, ejecutar herramientas (ipconfig, sfc, eventvwr). ¿La teoría se confirma?</li>
+          <li><b>Establecer un plan e implementar:</b> Cambiar UN elemento a la vez. Tomar snapshot antes. Documentar cada paso.</li>
+          <li><b>Verificar la solución:</b> ¿El problema desapareció? ¿Hay efectos secundarios? Que el usuario confirme que funciona.</li>
+          <li><b>Documentar y prevenir:</b> Registrar: síntoma · causa · solución · fecha. ¿Cómo evitar que vuelva a ocurrir?</li>
+        </ol>
+      </div>
+      <div class="debateBox">
+        <div class="dtitle">🗣 Caso de cierre</div>
+        <p>Un usuario llama: "mi computadora no prende". Siguiendo los 6 pasos, ¿qué preguntarías primero y cuál sería tu primer diagnóstico remoto?</p>
+      </div>`,
+    rightBadges:{ak:"Primero",av:"Escuchar bien",bk:"Cambiar",bv:"1 elemento a la vez"},
+    imgFile:"images/bsod-problemas.svg"},
+
+    /* 8 · Pausa */
+    {kicker:"PAUSA ACTIVA",title:"Pausa activa — 10 minutos",
+    desc:"Último receso del curso. Al volver: entrega y defensa del proyecto grupal.",
+    leftBlocksHTML:`
+      <div class="bigcard green">
+        <div class="title">✅ Teoría completada — Semana 4</div>
+        <ul>
+          <li>Plan de mantenimiento preventivo (diario/semanal/mensual/trimestral)</li>
+          <li>Herramientas de limpieza: cleanmgr, %temp%, defrag, TRIM SSD</li>
+          <li>Backup: Historial de archivos, imagen del sistema, puntos de restauración</li>
+          <li>Regla 3-2-1 del backup</li>
+          <li>BSOD: causas, stop codes y proceso de diagnóstico</li>
+          <li>6 pasos del proceso de solución de problemas</li>
+        </ul>
+      </div>
+      <div class="proyectoBox">
+        <div class="ptitle">🔴 Al volver — Entrega del Proyecto (55%)</div>
+        <p>Orden de presentación definido por el docente. Cada grupo tiene 15 minutos en total: 10 de presentación + 5 de preguntas técnicas. Deben tener VirtualBox abierto y listo.</p>
+      </div>`,
+    rightBadges:{ak:"Receso",av:"10 minutos",bk:"Al volver",bv:"Proyecto 55%"},
+    imgFile:"images/portada.svg"},
+
+    /* 9 · Proyecto - Intro defensa */
+    {kicker:"DEFENSA DEL PROYECTO",title:"Presentación y defensa — Proyecto DataTec S.A.",
+    desc:"Último bloque del curso. Cada grupo presenta su proyecto completo frente al grupo y defiende las decisiones técnicas tomadas.",
+    leftBlocksHTML:`
+      <div class="proyectoBox">
+        <div class="ptitle">🏆 Proyecto grupal — 55% del curso</div>
+        <p>Configuración completa de un sistema operativo Windows en VirtualBox para la empresa ficticia DataTec S.A., con todos los módulos evaluados funcionando.</p>
+      </div>
+      <div class="bigcard">
+        <div class="title">📋 Estructura de la presentación (10 min)</div>
+        <ol class="stepList">
+          <li>Presentar el escenario: ¿Qué tenía DataTec y qué configuraron? (1 min)</li>
+          <li>Demo en vivo: Panel de Control, usuarios creados, carpeta compartida (3 min)</li>
+          <li>Demo RDP: conectarse de VM2 a VM1 en vivo (2 min)</li>
+          <li>Mostrar comandos CLI ejecutados y sus resultados (2 min)</li>
+          <li>Mostrar documentación: tabla de config + capturas (1 min)</li>
+          <li>Conclusiones: ¿Qué aprendieron? ¿Qué cambiarían? (1 min)</li>
+        </ol>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">⚠️ Preguntas del docente (5 min)</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Cualquier integrante puede ser preguntado. Todos deben conocer el proyecto completo, no solo su parte. La defensa es individual aunque el proyecto es grupal.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Por grupo",av:"15 min total",bk:"Peso",bv:"55% del curso"},
+    imgFile:"images/cierre.svg"},
+
+    /* 10 · Rubrica proyecto */
+    {kicker:"RÚBRICA DEL PROYECTO",title:"Criterios de evaluación del proyecto",
+    desc:"El proyecto se evalúa con 6 criterios en escala 1–10. El promedio equivale al 55% de la nota final del curso.",
+    leftBlocksHTML:`
+      <div class="bigcard">
+        <div class="title">📊 6 criterios de evaluación (cada uno /10)</div>
+        <div style="overflow-x:auto;margin-top:8px">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;color:var(--muted)">
+            <thead>
+              <tr style="background:rgba(11,102,195,.10);color:var(--brand2)">
+                <th style="padding:7px 10px;text-align:left">#</th>
+                <th style="padding:7px 10px;text-align:left">Criterio</th>
+                <th style="padding:7px 10px;text-align:center">Peso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">1</td><td>Configuración del Panel de Control y utilidades Windows</td><td style="text-align:center">/10</td></tr>
+              <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">2</td><td>Administración de cuentas, usuarios, red e internet</td><td style="text-align:center">/10</td></tr>
+              <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">3</td><td>Instalación y configuración de discos y aplicaciones</td><td style="text-align:center">/10</td></tr>
+              <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">4</td><td>Compartición de recursos locales (carpetas + impresora)</td><td style="text-align:center">/10</td></tr>
+              <tr style="border-bottom:1px solid var(--stroke)"><td style="padding:6px 10px">5</td><td>Configuración de red cableada (IPs, adaptadores, ping)</td><td style="text-align:center">/10</td></tr>
+              <tr><td style="padding:6px 10px">6</td><td>Configuración de interfaces de red inalámbrica en Windows</td><td style="text-align:center">/10</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="bigcard green">
+        <div class="title">✅ Para obtener nota satisfactoria (7–10)</div>
+        <ul>
+          <li>Funciona todo en VirtualBox durante la demo en vivo</li>
+          <li>Pueden explicar cada decisión técnica tomada</li>
+          <li>Documentación completa con capturas de pantalla</li>
+          <li>Todos los integrantes pueden responder preguntas</li>
+        </ul>
+      </div>`,
+    rightBadges:{ak:"Promedio",av:"6 criterios /10",bk:"Nota final",bv:"55% del curso"},
+    imgFile:"images/cierre.svg"},
+
+    /* 11 · Preguntas frecuentes defensa */
+    {kicker:"PREGUNTAS DE DEFENSA",title:"Preguntas típicas en la defensa técnica",
+    desc:"El docente puede hacer cualquiera de estas preguntas durante los 5 minutos de defensa. Todo el grupo debe poder responderlas.",
+    leftBlocksHTML:`
+      <div class="grid">
+        <div class="card">
+          <strong>🖥 Panel de Control</strong>
+          <ul>
+            <li>¿Cómo abrís Panel de Control en W11 que ya no está en el menú inicio?</li>
+            <li>¿Qué hace ncpa.cpl?</li>
+            <li>¿Cómo cambian el plan de energía desde CMD?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>👤 Usuarios</strong>
+          <ul>
+            <li>¿Por qué el usuario SoporteTI es estándar y no admin?</li>
+            <li>¿Cómo ven los usuarios desde CMD? (net user)</li>
+            <li>¿Qué pasa si desactivás la cuenta Administrator?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🌐 Red</strong>
+          <ul>
+            <li>¿Por qué usaron Host-Only y no NAT?</li>
+            <li>¿Qué significa una IP 169.254.x.x?</li>
+            <li>¿Cómo liberarían y renovarían la IP?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>🖥 RDP</strong>
+          <ul>
+            <li>¿Qué puerto usa RDP y cómo verificaron que estaba activo?</li>
+            <li>¿Por qué RDP solo funciona con cuentas con contraseña?</li>
+            <li>¿Cómo habilitarían RDP desde CMD?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">⚠️ Respuesta esperada: razonamiento técnico</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          No basta con decir "así lo hicimos". El docente busca que expliquen el <b>por qué</b> de cada decisión: por qué ese modo de red, por qué ese tipo de usuario, por qué esa IP, qué pasaría si lo cambiaran.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Defensa",av:"5 min / grupo",bk:"Énfasis",bv:"El POR QUÉ"},
+    imgFile:"images/cierre.svg"},
+
+    /* 12 · Retroalimentación del curso */
+    {kicker:"RETROALIMENTACIÓN FINAL",title:"Cierre y retroalimentación del curso",
+    desc:"El espacio final para que docente y estudiantes compartan aprendizajes, reflexiones y próximos pasos profesionales.",
+    leftBlocksHTML:`
+      <div class="bigcard green">
+        <div class="title">✅ Lo que dominamos en TI-313</div>
+        <ul>
+          <li>Tipos y procesos de impresión (láser, térmica, impacto)</li>
+          <li>Configurar y compartir impresoras en red</li>
+          <li>Virtualización con VirtualBox — VMs funcionales</li>
+          <li>Computación en la nube: IaaS, PaaS, SaaS</li>
+          <li>Instalar y configurar Windows 10/11 desde cero</li>
+          <li>Administración completa del SO: usuarios, red, apps, disco</li>
+          <li>Comandos CLI de soporte técnico</li>
+          <li>Compartir recursos y acceso remoto (RDP)</li>
+          <li>Mantenimiento preventivo y backup del SO</li>
+          <li>Proceso sistemático de solución de problemas</li>
+        </ul>
+      </div>
+      <div class="proyectoBox">
+        <div class="ptitle">🏆 Siguiente paso: TI-313 → Mundo laboral</div>
+        <p>Con estas competencias están listos para roles de: Especialista en Soporte Técnico · Técnico de Sistemas · Administrador de Estaciones de Trabajo · Técnico Help Desk L2.</p>
+      </div>`,
+    rightBadges:{ak:"Competencia",av:"CTI-ITOP2-4",bk:"Nivel SFIA",bv:"2 — Logrado"},
+    imgFile:"images/cierre.svg"},
+
+    /* 13 · Insignias digitales */
+    {kicker:"INSIGNIAS DIGITALES",title:"Trámite de insignias digitales — Badgr / Credly",
+    desc:"Al completar el curso con nota aprobatoria, tienen derecho a una insignia digital que certifica la competencia CTI-ITOP2-4.",
+    leftBlocksHTML:`
+      <div class="bigcard">
+        <div class="title">¿Qué es una insignia digital?</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          Es una credencial digital verificable que certifica que completaron la competencia
+          <b>CTI-ITOP2-4 — Soporte Técnico de Sistemas Operativos</b> nivel SFIA 2. Pueden compartirla en LinkedIn, CV digital o portafolio.
+        </div>
+      </div>
+      <div class="bigcard green">
+        <div class="title">✅ Proceso para obtener su insignia</div>
+        <ol class="stepList">
+          <li>El docente registra las notas finales en el sistema.</li>
+          <li>La Universidad emite la insignia vía plataforma de credenciales digitales.</li>
+          <li>Recibirán un correo a su cuenta @ucenfotec.ac.cr con el link de la insignia.</li>
+          <li>Aceptar la insignia y agregar a su perfil de LinkedIn o portafolio.</li>
+        </ol>
+      </div>
+      <div class="bigcard amber">
+        <div class="title">⚠️ Semana 5 — Notas y trámites</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.6">
+          La semana 5 es de trámites administrativos: entrega de notas finales, cierre del curso en el sistema y trámite de insignias digitales. No es clase presencial.
+        </div>
+      </div>`,
+    rightBadges:{ak:"Competencia",av:"CTI-ITOP2-4",bk:"Compartir en",bv:"LinkedIn ✓"},
+    imgFile:"images/cierre.svg"},
+
+    /* 14 · Cierre final */
+    {kicker:"¡CURSO COMPLETADO!",title:"TI-313 — ¡Lo lograron!",
+    desc:"Resumen final del curso Introducción al Soporte Técnico III. Han desarrollado competencias reales de soporte técnico de nivel profesional.",
+    leftBlocksHTML:`
+      <div style="text-align:center;font-size:48px;margin:10px 0;">🏆</div>
+      <div class="bigcard green">
+        <div class="title">Evaluación final del curso TI-313</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.9">
+          📋 <b>Proyecto grupal:</b> 55% — Configuración completa del SO en VirtualBox<br>
+          🧪 <b>Caso Práctico 1:</b> 15% — Impresoras y compartir en red<br>
+          🧪 <b>Caso Práctico 2:</b> 15% — Instalar Windows en VirtualBox<br>
+          🧪 <b>Caso Práctico 3:</b> 15% — Administración del SO Windows
+        </div>
+      </div>
+      <div class="bigcard">
+        <div class="title">Competencia desarrollada</div>
+        <div style="color:var(--muted);font-size:13px;line-height:1.7">
+          <b>CTI-ITOP2-4 · Soporte Técnico de Sistemas Operativos · SFIA Nivel 2</b><br>
+          Comprenden la administración ágil de sistemas computacionales para el mantenimiento y la mejora del rendimiento de los equipos informáticos, aplicando técnicas y estrategias de soporte técnico de manera detallada.
+        </div>
+      </div>
+      <div class="proyectoBox">
+        <div class="ptitle">🎯 Próximo nivel: TI-314 o mundo laboral</div>
+        <p>Con TI-311 + TI-312 + TI-313 tienen la base técnica para trabajar como técnico de soporte L1/L2 en cualquier empresa de TI de Costa Rica.</p>
+      </div>`,
+    rightBadges:{ak:"Curso",av:"TI-313 ✅",bk:"Créditos",bv:"1 académico"},
+    imgFile:"images/cierre.svg"}
+  ];
+
+  /* DOM */
+  const elCounter=document.getElementById("counterTxt"),elKicker=document.getElementById("kicker"),
+    elTitle=document.getElementById("title"),elDesc=document.getElementById("desc"),
+    elLeft=document.getElementById("leftBlocks"),elRightBot=document.getElementById("rightBottom"),
+    elImg=document.getElementById("slideImg"),elPh=document.getElementById("placeholder"),
+    elProgress=document.getElementById("progressBar"),
+    prevBtn=document.getElementById("prevBtn"),nextBtn=document.getElementById("nextBtn");
+
+  function setSlideImage(src){if(!src){elImg.style.display="none";elPh.style.display="block";return;}elImg.style.display="none";elPh.style.display="block";elImg.src=src;elImg.onload=()=>{elImg.style.display="block";elPh.style.display="none";};elImg.onerror=()=>{elImg.style.display="none";elPh.textContent="Imagen no encontrada: "+src;};}
+  function renderBadges(b){elRightBot.innerHTML="";const mk=(l,v)=>{const d=document.createElement("div");d.className="miniCard";d.innerHTML=`<div class="label">${l}</div><div class="value">${v}</div>`;return d;};if(b?.ak)elRightBot.appendChild(mk(b.ak,b.av||""));if(b?.bk)elRightBot.appendChild(mk(b.bk,b.bv||""));}
+  function wireReveal(){document.querySelectorAll("[data-reveal]").forEach(b=>{b.onclick=()=>{const e=document.getElementById(b.dataset.reveal);if(e)e.style.display="block";};});document.querySelectorAll("[data-hide]").forEach(b=>{b.onclick=()=>{const e=document.getElementById(b.dataset.hide);if(e)e.style.display="none";};});}
+  let idx=0;
+  function render(){const s=slides[idx];elCounter.textContent=`${pad2(idx+1)} / ${pad2(slides.length)}`;elKicker.textContent=s.kicker||"";elTitle.textContent=s.title||"";elDesc.textContent=s.desc||"";elLeft.innerHTML=s.leftBlocksHTML||"";renderBadges(s.rightBadges||null);setSlideImage(s.imgFile||"");elProgress.style.width=(((idx+1)/slides.length)*100)+"%";wireReveal();clearPen();document.querySelector(".left").scrollTop=0;}
+  function next(){if(idx<slides.length-1){idx++;render();}}
+  function prev(){if(idx>0){idx--;render();}}
+  nextBtn.addEventListener("click",next);prevBtn.addEventListener("click",prev);
+  window.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();next();}if(e.key==="ArrowLeft"){e.preventDefault();prev();}});
+
+  /* PEN */
+  const canvas=document.getElementById("penCanvas"),penToggle=document.getElementById("penToggle"),penClear=document.getElementById("penClear"),penSize=document.getElementById("penSize"),penColor=document.getElementById("penColor");
+  let penOn=false,drawing=false,last={x:0,y:0};
+  function resizeCanvas(){const deck=document.querySelector(".deck"),r=deck.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.floor(r.width*dpr);canvas.height=Math.floor(r.height*dpr);canvas.style.width=r.width+"px";canvas.style.height=r.height+"px";canvas.getContext("2d").setTransform(dpr,0,0,dpr,0,0);}
+  window.addEventListener("resize",resizeCanvas);
+  function getPos(ev){const r=document.querySelector(".deck").getBoundingClientRect(),src=ev.touches?ev.touches[0]:ev;return{x:src.clientX-r.left,y:src.clientY-r.top};}
+  function drawLine(a,b){const ctx=canvas.getContext("2d");ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=penColor.value;ctx.lineWidth=Number(penSize.value);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+  function clearPen(){canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);}
+  const deck=document.querySelector(".deck");
+  deck.addEventListener("mousedown",e=>{if(!penOn)return;drawing=true;last=getPos(e);e.preventDefault();});
+  deck.addEventListener("mousemove",e=>{if(!penOn||!drawing)return;const p=getPos(e);drawLine(last,p);last=p;e.preventDefault();});
+  window.addEventListener("mouseup",()=>{drawing=false;});
+  deck.addEventListener("touchstart",e=>{if(!penOn)return;drawing=true;last=getPos(e);e.preventDefault();},{passive:false});
+  deck.addEventListener("touchmove",e=>{if(!penOn||!drawing)return;const p=getPos(e);drawLine(last,p);last=p;e.preventDefault();},{passive:false});
+  window.addEventListener("touchend",()=>{drawing=false;});
+  penToggle.addEventListener("click",()=>{penOn=!penOn;canvas.style.pointerEvents=penOn?"auto":"none";penToggle.classList.toggle("on",penOn);penToggle.textContent=penOn?"✏️ Activo":"✏️ Lápiz";});
+  penClear.addEventListener("click",()=>clearPen());
+  resizeCanvas();render();
+})();
+</script>
+</body>
+</html>

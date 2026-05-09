@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/><stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="320" fill="url(#bg)" rx="16"/>
+  <text x="250" y="22" font-family="sans-serif" font-size="13" font-weight="800" fill="#0a4f96" text-anchor="middle">Redes de Windows — Compartir y Acceso Remoto</text>
+  <!-- PC Server -->
+  <rect x="30" y="40" width="90" height="65" rx="8" fill="rgba(11,102,195,.8)"/>
+  <text x="75" y="62" font-family="sans-serif" font-size="22" text-anchor="middle">🖥</text>
+  <text x="75" y="80" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">PC Servidor</text>
+  <text x="75" y="92" font-family="sans-serif" font-size="8" fill="rgba(255,255,255,.7)" text-anchor="middle">192.168.56.10</text>
+  <!-- Shared folder icon -->
+  <rect x="30" y="118" width="90" height="35" rx="5" fill="rgba(22,163,74,.7)"/>
+  <text x="75" y="131" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">📁 Compartida</text>
+  <text x="75" y="144" font-family="sans-serif" font-size="8" fill="rgba(255,255,255,.85)" text-anchor="middle">\\56.10\Publico</text>
+  <!-- Shared printer -->
+  <rect x="30" y="162" width="90" height="35" rx="5" fill="rgba(14,165,233,.7)"/>
+  <text x="75" y="175" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">🖨 Impresora</text>
+  <text x="75" y="188" font-family="sans-serif" font-size="8" fill="rgba(255,255,255,.85)" text-anchor="middle">\\56.10\HP-Laser</text>
+  <!-- Arrows -->
+  <line x1="120" y1="72" x2="155" y2="72" stroke="#0b66c3" stroke-width="2"/>
+  <polygon points="153,67 163,72 153,77" fill="#0b66c3"/>
+  <line x1="120" y1="135" x2="155" y2="150" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="152,146 163,153 155,160" fill="#16a34a"/>
+  <line x1="120" y1="179" x2="155" y2="190" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="152,186 163,193 155,200" fill="#0ea5e9"/>
+  <!-- Client 1 -->
+  <rect x="165" y="40" width="80" height="55" rx="8" fill="rgba(217,119,6,.7)"/>
+  <text x="205" y="60" font-family="sans-serif" font-size="18" text-anchor="middle">💻</text>
+  <text x="205" y="76" font-family="sans-serif" font-size="8.5" font-weight="700" fill="white" text-anchor="middle">Cliente 1</text>
+  <text x="205" y="87" font-family="sans-serif" font-size="7.5" fill="rgba(255,255,255,.7)" text-anchor="middle">192.168.56.11</text>
+  <!-- Client 2 -->
+  <rect x="165" y="108" width="80" height="55" rx="8" fill="rgba(217,119,6,.6)"/>
+  <text x="205" y="128" font-family="sans-serif" font-size="18" text-anchor="middle">💻</text>
+  <text x="205" y="144" font-family="sans-serif" font-size="8.5" font-weight="700" fill="white" text-anchor="middle">Cliente 2</text>
+  <text x="205" y="155" font-family="sans-serif" font-size="7.5" fill="rgba(255,255,255,.7)" text-anchor="middle">192.168.56.12</text>
+  <!-- Steps to share -->
+  <rect x="258" y="32" width="228" height="130" rx="8" fill="rgba(11,102,195,.07)" stroke="rgba(11,102,195,.2)" stroke-width="1"/>
+  <text x="268" y="49" font-family="sans-serif" font-size="10" font-weight="800" fill="#0a4f96">📁 Compartir carpeta</text>
+  <text x="268" y="62" font-family="sans-serif" font-size="8.5" fill="#50607a">1. Clic derecho en carpeta → Propiedades</text>
+  <text x="268" y="74" font-family="sans-serif" font-size="8.5" fill="#50607a">2. Pestaña Compartir → Compartir...</text>
+  <text x="268" y="86" font-family="sans-serif" font-size="8.5" fill="#50607a">3. Agregar usuarios o "Todos"</text>
+  <text x="268" y="98" font-family="sans-serif" font-size="8.5" fill="#50607a">4. Permisos: Leer / Leer y escribir</text>
+  <text x="268" y="110" font-family="sans-serif" font-size="8.5" fill="#50607a">5. Verificar con: \\IP\NombreCarpeta</text>
+  <text x="268" y="128" font-family="sans-serif" font-size="9" font-weight="700" fill="#16a34a">Desde el cliente:</text>
+  <text x="268" y="141" font-family="monospace" font-size="8.5" fill="#0a4f96">\\192.168.56.10\Publico</text>
+  <text x="268" y="155" font-family="sans-serif" font-size="8.5" fill="#50607a">o mapear unidad de red en el Explorador</text>
+  <!-- RDP -->
+  <rect x="258" y="170" width="228" height="100" rx="8" fill="rgba(22,163,74,.07)" stroke="rgba(22,163,74,.2)" stroke-width="1"/>
+  <text x="268" y="187" font-family="sans-serif" font-size="10" font-weight="800" fill="#16a34a">🖥 Escritorio Remoto (RDP)</text>
+  <text x="268" y="200" font-family="sans-serif" font-size="8.5" fill="#50607a">Puerto: TCP 3389 · Protocolo: RDP</text>
+  <text x="268" y="212" font-family="sans-serif" font-size="8.5" fill="#50607a">Habilitar: Panel de Control → Sistema →</text>
+  <text x="268" y="224" font-family="sans-serif" font-size="8.5" fill="#50607a">"Permitir conexiones remotas"</text>
+  <text x="268" y="240" font-family="monospace" font-size="8.5" fill="#0a4f96">mstsc → IP del equipo → Conectar</text>
+  <text x="268" y="255" font-family="sans-serif" font-size="8.5" fill="#50607a">El firewall debe permitir el puerto 3389</text>
+  <text x="268" y="266" font-family="sans-serif" font-size="8.5" fill="#dc2626" font-weight="700">⚠️ Solo cuentas con contraseña</text>
+  <!-- Bottom: network drive -->
+  <rect x="30" y="210" width="215" height="95" rx="8" fill="rgba(255,255,255,.6)" stroke="rgba(11,102,195,.15)" stroke-width="1"/>
+  <text x="137" y="228" font-family="sans-serif" font-size="10" font-weight="800" fill="#0a4f96" text-anchor="middle">Mapear unidad de red</text>
+  <text x="40" y="243" font-family="sans-serif" font-size="8.5" fill="#50607a">1. Explorador → Este equipo</text>
+  <text x="40" y="255" font-family="sans-serif" font-size="8.5" fill="#50607a">2. Conectar a unidad de red</text>
+  <text x="40" y="267" font-family="sans-serif" font-size="8.5" fill="#50607a">3. Elegir letra (ej: Z:)</text>
+  <text x="40" y="279" font-family="monospace" font-size="8.5" fill="#0a4f96">Carpeta: \\56.10\Publico</text>
+  <text x="40" y="291" font-family="sans-serif" font-size="8.5" fill="#50607a">4. ✅ Conectar al iniciar sesión</text>
+  <text x="40" y="303" font-family="sans-serif" font-size="8" fill="#16a34a">→ Aparece como disco Z: en el explorador</text>
+</svg>

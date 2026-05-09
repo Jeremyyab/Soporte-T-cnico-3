@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/><stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="320" fill="url(#bg)" rx="16"/>
+  <!-- BSOD simulation -->
+  <rect x="15" y="18" width="200" height="145" rx="8" fill="#0b5ea8"/>
+  <text x="115" y="42" font-family="sans-serif" font-size="13" font-weight="800" fill="white" text-anchor="middle">:(</text>
+  <text x="115" y="58" font-family="sans-serif" font-size="7.5" fill="rgba(255,255,255,.9)" text-anchor="middle">Tu PC tuvo un problema y necesita</text>
+  <text x="115" y="69" font-family="sans-serif" font-size="7.5" fill="rgba(255,255,255,.9)" text-anchor="middle">reiniciarse. Recopilando info...</text>
+  <text x="115" y="85" font-family="sans-serif" font-size="8" fill="rgba(255,255,255,.7)" text-anchor="middle">100% completado</text>
+  <text x="115" y="102" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,.7)" text-anchor="middle">STOP CODE:</text>
+  <text x="115" y="114" font-family="monospace" font-size="8.5" fill="white" text-anchor="middle">CRITICAL_PROCESS_DIED</text>
+  <text x="115" y="130" font-family="sans-serif" font-size="6.5" fill="rgba(255,255,255,.55)" text-anchor="middle">Si deseas saber mas, busca este error</text>
+  <text x="115" y="141" font-family="sans-serif" font-size="6.5" fill="rgba(255,255,255,.55)" text-anchor="middle">en linea: support.microsoft.com</text>
+  <text x="115" y="152" font-family="sans-serif" font-size="7.5" fill="rgba(255,255,255,.6)" text-anchor="middle">Archivo de volcado: C:\Windows\Minidump</text>
+  <!-- BSOD causes -->
+  <rect x="15" y="172" width="200" height="138" rx="8" fill="rgba(220,38,38,.07)" stroke="rgba(220,38,38,.22)" stroke-width="1"/>
+  <text x="115" y="189" font-family="sans-serif" font-size="9.5" font-weight="800" fill="#dc2626" text-anchor="middle">Causas comunes de BSOD</text>
+  <text x="25" y="204" font-family="sans-serif" font-size="8.5" fill="#50607a">• Driver corrompido o incompatible</text>
+  <text x="25" y="217" font-family="sans-serif" font-size="8.5" fill="#50607a">• RAM defectuosa (mdsched.exe)</text>
+  <text x="25" y="230" font-family="sans-serif" font-size="8.5" fill="#50607a">• Disco con sectores dañados</text>
+  <text x="25" y="243" font-family="sans-serif" font-size="8.5" fill="#50607a">• Sobrecalentamiento del CPU/GPU</text>
+  <text x="25" y="256" font-family="sans-serif" font-size="8.5" fill="#50607a">• Software de antivirus en conflicto</text>
+  <text x="25" y="269" font-family="sans-serif" font-size="8.5" fill="#50607a">• Actualizacion defectuosa del SO</text>
+  <text x="25" y="284" font-family="sans-serif" font-size="8.5" fill="#50607a">• Virus/malware en proceso del sistema</text>
+  <text x="25" y="298" font-family="monospace" font-size="8" fill="#dc2626">→ Revisar minidump con WinDbg</text>
+  <!-- Right: Solucion paso a paso -->
+  <rect x="230" y="18" width="258" height="293" rx="10" fill="rgba(255,255,255,.55)" stroke="rgba(11,102,195,.15)" stroke-width="1"/>
+  <text x="359" y="36" font-family="sans-serif" font-size="10.5" font-weight="800" fill="#0a4f96" text-anchor="middle">Proceso de solucion de problemas</text>
+  <!-- Steps -->
+  <circle cx="250" cy="56" r="9" fill="rgba(11,102,195,.7)"/>
+  <text x="250" y="60" font-family="sans-serif" font-size="8" font-weight="800" fill="white" text-anchor="middle">1</text>
+  <text x="265" y="54" font-family="sans-serif" font-size="9" fill="#0a4f96" font-weight="700">Identificar el problema</text>
+  <text x="265" y="66" font-family="sans-serif" font-size="8.5" fill="#50607a">¿Cuando ocurre? ¿Que mensaje da?</text>
+  <line x1="250" y1="65" x2="250" y2="82" stroke="#0b66c3" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="250" cy="91" r="9" fill="rgba(11,102,195,.6)"/>
+  <text x="250" y="95" font-family="sans-serif" font-size="8" font-weight="800" fill="white" text-anchor="middle">2</text>
+  <text x="265" y="89" font-family="sans-serif" font-size="9" fill="#0a4f96" font-weight="700">Aislar la causa</text>
+  <text x="265" y="101" font-family="sans-serif" font-size="8.5" fill="#50607a">Visor de eventos · Modo seguro · Logs</text>
+  <line x1="250" y1="100" x2="250" y2="118" stroke="#0b66c3" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="250" cy="127" r="9" fill="rgba(14,165,233,.8)"/>
+  <text x="250" y="131" font-family="sans-serif" font-size="8" font-weight="800" fill="white" text-anchor="middle">3</text>
+  <text x="265" y="125" font-family="sans-serif" font-size="9" fill="#0a4f96" font-weight="700">Buscar soluciones</text>
+  <text x="265" y="137" font-family="sans-serif" font-size="8.5" fill="#50607a">support.microsoft.com · Event ID</text>
+  <line x1="250" y1="136" x2="250" y2="154" stroke="#0b66c3" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="250" cy="163" r="9" fill="rgba(22,163,74,.8)"/>
+  <text x="250" y="167" font-family="sans-serif" font-size="8" font-weight="800" fill="white" text-anchor="middle">4</text>
+  <text x="265" y="161" font-family="sans-serif" font-size="9" fill="#0a4f96" font-weight="700">Implementar la solucion</text>
+  <text x="265" y="173" font-family="sans-serif" font-size="8.5" fill="#50607a">Un cambio a la vez · Con snapshot previo</text>
+  <line x1="250" y1="172" x2="250" y2="190" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="250" cy="199" r="9" fill="rgba(217,119,6,.8)"/>
+  <text x="250" y="203" font-family="sans-serif" font-size="8" font-weight="800" fill="white" text-anchor="middle">5</text>
+  <text x="265" y="197" font-family="sans-serif" font-size="9" fill="#0a4f96" font-weight="700">Verificar resultado</text>
+  <text x="265" y="209" font-family="sans-serif" font-size="8.5" fill="#50607a">¿El problema desaparecio? ¿Hay efectos secundarios?</text>
+  <line x1="250" y1="208" x2="250" y2="226" stroke="#d97706" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="250" cy="235" r="9" fill="rgba(11,102,195,.85)"/>
+  <text x="250" y="239" font-family="sans-serif" font-size="8" font-weight="800" fill="white" text-anchor="middle">6</text>
+  <text x="265" y="233" font-family="sans-serif" font-size="9" fill="#0a4f96" font-weight="700">Documentar</text>
+  <text x="265" y="245" font-family="sans-serif" font-size="8.5" fill="#50607a">Sintoma · Causa · Solucion · Fecha</text>
+  <!-- Comandos de recuperacion -->
+  <rect x="237" y="258" width="244" height="46" rx="7" fill="rgba(11,102,195,.08)" stroke="rgba(11,102,195,.2)" stroke-width="1"/>
+  <text x="245" y="273" font-family="monospace" font-size="8.5" fill="#0a4f96">bootrec /fixmbr · bootrec /fixboot</text>
+  <text x="245" y="285" font-family="monospace" font-size="8.5" fill="#0a4f96">bootrec /rebuildbcd</text>
+  <text x="245" y="297" font-family="sans-serif" font-size="8.5" fill="#50607a">→ Desde consola de recuperacion (ISO)</text>
+</svg>

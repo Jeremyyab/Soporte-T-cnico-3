@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf1f8"/><stop offset="100%" style="stop-color:#cfdceb"/>
+    </linearGradient>
+    <linearGradient id="arr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0b66c3"/><stop offset="100%" style="stop-color:#0ea5e9"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="320" fill="url(#bg)" rx="16"/>
+  <text x="250" y="24" font-family="sans-serif" font-size="13" font-weight="800" fill="#0a4f96" text-anchor="middle">Semana 3 — Cierre y Proxima Semana</text>
+  <!-- Learned -->
+  <rect x="20" y="35" width="215" height="210" rx="10" fill="rgba(22,163,74,.08)" stroke="rgba(22,163,74,.25)" stroke-width="1.5"/>
+  <text x="127" y="54" font-family="sans-serif" font-size="11" font-weight="800" fill="#16a34a" text-anchor="middle">Aprendimos Semana 3</text>
+  <text x="30" y="72" font-family="sans-serif" font-size="9" fill="#50607a">Escritorio Windows y atajos de teclado</text>
+  <text x="30" y="85" font-family="sans-serif" font-size="9" fill="#50607a">Panel de Control: categorias y accesos</text>
+  <text x="30" y="98" font-family="sans-serif" font-size="9" fill="#50607a">Cuentas: admin, estandar, invitado</text>
+  <text x="30" y="111" font-family="sans-serif" font-size="9" fill="#50607a">Herramientas: Adm. Tareas, Servicios</text>
+  <text x="30" y="124" font-family="sans-serif" font-size="9" fill="#50607a">Visor de eventos y monitor rendimiento</text>
+  <text x="30" y="137" font-family="sans-serif" font-size="9" fill="#50607a">Comandos Win+R esenciales</text>
+  <text x="30" y="150" font-family="sans-serif" font-size="9" fill="#50607a">CLI: ipconfig, netstat, sfc, diskpart</text>
+  <text x="30" y="163" font-family="sans-serif" font-size="9" fill="#50607a">Instalacion y desinstalacion de apps</text>
+  <text x="30" y="176" font-family="sans-serif" font-size="9" fill="#50607a">Sistemas de archivos: NTFS, FAT32</text>
+  <text x="30" y="189" font-family="sans-serif" font-size="9" fill="#50607a">Compartir carpetas e impresoras</text>
+  <text x="30" y="202" font-family="sans-serif" font-size="9" fill="#50607a">RDP: escritorio remoto puerto 3389</text>
+  <text x="30" y="215" font-family="sans-serif" font-size="9" fill="#50607a">Red Windows: mapear unidades</text>
+  <text x="30" y="228" font-family="sans-serif" font-size="9" fill="#50607a">CP3: configuracion completa en VM</text>
+  <!-- Arrow -->
+  <rect x="241" y="126" width="22" height="18" rx="3" fill="url(#arr)"/>
+  <polygon points="241,118 263,135 241,152" fill="url(#arr)"/>
+  <!-- Semana 4 -->
+  <rect x="270" y="35" width="215" height="210" rx="10" fill="rgba(217,119,6,.08)" stroke="rgba(217,119,6,.25)" stroke-width="1.5"/>
+  <text x="377" y="54" font-family="sans-serif" font-size="11" font-weight="800" fill="#d97706" text-anchor="middle">Semana 4 — Mantenimiento y Proyecto</text>
+  <text x="280" y="72" font-family="sans-serif" font-size="9" fill="#50607a">Redes Windows (continuacion)</text>
+  <text x="280" y="85" font-family="sans-serif" font-size="9" fill="#50607a">Protocolos de acceso remoto</text>
+  <text x="280" y="98" font-family="sans-serif" font-size="9" fill="#50607a">Mantenimiento preventivo SO</text>
+  <text x="280" y="111" font-family="sans-serif" font-size="9" fill="#50607a">Plan de mantenimiento periodico</text>
+  <text x="280" y="124" font-family="sans-serif" font-size="9" fill="#50607a">Copia de seguridad y restauracion</text>
+  <text x="280" y="137" font-family="sans-serif" font-size="9" fill="#50607a">Solucion de problemas avanzada</text>
+  <text x="280" y="155" font-family="sans-serif" font-size="9" fill="#d97706" font-weight="700">Entrega y defensa del proyecto</text>
+  <text x="280" y="168" font-family="sans-serif" font-size="9" fill="#d97706" font-weight="700">Presentacion grupal (10 min/grupo)</text>
+  <!-- Warning -->
+  <rect x="270" y="185" width="215" height="56" rx="7" fill="rgba(220,38,38,.08)" stroke="rgba(220,38,38,.22)" stroke-width="1"/>
+  <text x="377" y="202" font-family="sans-serif" font-size="9.5" font-weight="800" fill="#dc2626" text-anchor="middle">ULTIMA SEMANA: tienen que entregar</text>
+  <text x="377" y="215" font-family="sans-serif" font-size="9" fill="#50607a" text-anchor="middle">Proyecto completo en VirtualBox</text>
+  <text x="377" y="227" font-family="sans-serif" font-size="9" fill="#50607a" text-anchor="middle">Documentacion + defensa oral</text>
+  <!-- Reminder bottom -->
+  <rect x="20" y="257" width="465" height="48" rx="8" fill="rgba(255,255,255,.6)" stroke="rgba(11,102,195,.15)" stroke-width="1"/>
+  <text x="252" y="275" font-family="sans-serif" font-size="10.5" font-weight="800" fill="#0a4f96" text-anchor="middle">Avance del proyecto — 10 horas esta semana</text>
+  <text x="252" y="290" font-family="sans-serif" font-size="9.5" fill="#50607a" text-anchor="middle">Modulos 3 y 4: Windows, red cableada/inalambrica, recursos compartidos, RDP</text>
+  <text x="252" y="302" font-family="sans-serif" font-size="9" fill="#50607a" text-anchor="middle">Tienen que llegar a la Semana 4 con el proyecto 80% avanzado</text>
+</svg>
